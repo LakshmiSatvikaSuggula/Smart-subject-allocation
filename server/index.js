@@ -4,96 +4,122 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'yourStrongSecretKey123'; // Change for production
+const JWT_SECRET = 'YourSecretKeyHere';
 
-// MongoDB connection
+// Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/vignan', {
-  useNewUrlParser: true, useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-// User schema
+// User schema (no unique for regdNo)
 const userSchema = new mongoose.Schema({
-  regdNo: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
-  role: String,
+  regdNo: String,
   name: String,
-  email: String,
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true },
   department: String,
   percentage: String,
   cgpa: String,
   dob: String,
 });
-
 const User = mongoose.model('User', userSchema);
 
-// App initialization
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Registration endpoint
-app.post('/api/register', async (req, res) => {
-  try {
-    const { regdNo, password, name, email, department, percentage, cgpa, dob, role } = req.body;
+// Seed default admin if doesn't exist
+const seedAdmin = async () => {
+  const adminExists = await User.findOne({ role: 'admin' });
+  if (!adminExists) {
+    const hash = await bcrypt.hash('admin123', 10);
+    await User.create({
+      email: 'admin@vignan.edu',
+      password: hash,
+      role: 'admin',
+    });
+    console.log('Default admin account created: admin@vignan.edu / admin123');
+  }
+};
+seedAdmin();
 
-    if (!regdNo || !password || !name || !email || !department || !percentage || !cgpa || !dob || !role) {
-      return res.status(400).json({ error: 'Please fill all fields.' });
+// Registration
+app.post('/api/register', async (req, res) => {
+  console.log('Registration data:', req.body);
+
+  try {
+    const { role } = req.body;
+    if (role === 'admin') {
+      return res.status(400).json({ error: "Admin cannot register here. Please login." });
     }
 
-    const userExisting = await User.findOne({ regdNo });
-    if (userExisting) return res.status(400).json({ error: 'User already exists.' });
+    if (role === 'student') {
+      const { regdNo, name, email, password, department, percentage, cgpa, dob } = req.body;
+      if (!regdNo || !name || !email || !password || !department || !percentage || !cgpa || !dob) {
+        return res.status(400).json({ error: "Please fill all fields." });
+      }
+      // Uniqueness enforced in code, not schema
+      if (await User.findOne({ regdNo, role: "student" })) 
+        return res.status(400).json({ error: "Registration number already registered." });
+      if (await User.findOne({ email, role: "student" })) 
+        return res.status(400).json({ error: "Email already registered." });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+      const hash = await bcrypt.hash(password, 10);
+      await User.create({
+        regdNo, name, email, password: hash, role: "student", department, percentage, cgpa, dob
+      });
+      return res.json({ message: "Student registered successfully." });
 
-    const user = new User({
-      regdNo, password: hashedPassword, name, email, department, percentage, cgpa, dob, role
-    });
+    } else if (role === 'faculty') {
+      const { email, password } = req.body;
+      if (!email || !password) return res.status(400).json({ error: "Please fill all fields." });
+      if (await User.findOne({ email, role: "faculty" }))
+        return res.status(400).json({ error: "Email already registered." });
+      const hash = await bcrypt.hash(password, 10);
+      await User.create({ email, password: hash, role: "faculty" });
+      return res.json({ message: "Faculty registered successfully." });
+    }
 
-    await user.save();
-    res.json({ message: 'User registered successfully!' });
+    return res.status(400).json({ error: "Invalid role." });
   } catch (e) {
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error(e);
+    return res.status(500).json({ error: "Server error" });
   }
 });
 
-// Login endpoint
+// Login
 app.post('/api/login', async (req, res) => {
   try {
-    const { regdNo, password, role } = req.body;
-    if (!regdNo || !password) {
-      return res.status(400).json({ error: 'Please enter all fields.' });
-    }
-    const user = await User.findOne({ regdNo });
-    if (!user) {
-      return res.status(400).json({ error: 'User not found.' });
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ error: 'Invalid password.' });
+    const { role, regdNo, email, password } = req.body;
+    let user;
 
-    // (Optional) Check role match if needed: if (user.role !== role) return res.status(400).json({ error: 'Role mismatch.' });
+    // Student: login with regdNo
+    if (role === 'student') {
+      if (!regdNo || !password) return res.status(400).json({ error: "Please fill all fields." });
+      user = await User.findOne({ regdNo, role: "student" });
+      if (!user) return res.status(400).json({ error: "User not found." });
+    }
+    // Faculty/Admin: login with email
+    else if (role === 'faculty' || role === 'admin') {
+      if (!email || !password) return res.status(400).json({ error: "Please fill all fields." });
+      user = await User.findOne({ email, role });
+      if (!user) return res.status(400).json({ error: `${role.charAt(0).toUpperCase() + role.slice(1)} not found.` });
+    } else {
+      return res.status(400).json({ error: "Invalid role." });
+    }
 
-    const token = jwt.sign({ regdNo: user.regdNo, id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '2h' });
-    res.json({ token, user: {
-      regdNo: user.regdNo, name: user.name, role: user.role, email: user.email, department: user.department
-    }});
+    const matched = await bcrypt.compare(password, user.password);
+    if (!matched) return res.status(400).json({ error: "Invalid password." });
+
+    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '2h' });
+    return res.json({ token, user: { id: user._id, name: user.name, regdNo: user.regdNo, email: user.email, role: user.role } });
   } catch (e) {
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// (Optional) Protected route example:
-app.get('/api/protected', (req, res) => {
-  const bearer = req.headers.authorization;
-  if (!bearer) return res.status(401).json({ error: 'No token' });
-  try {
-    const decoded = jwt.verify(bearer.split(' ')[1], JWT_SECRET);
-    res.json({ message: 'You are authorized', decoded });
-  } catch {
-    res.status(401).json({ error: 'Token invalid' });
+    console.error(e);
+    return res.status(500).json({ error: "Server error" });
   }
 });
 
 const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

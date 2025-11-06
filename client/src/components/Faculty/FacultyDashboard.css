@@ -1,0 +1,252 @@
+/* src/components/Faculty/FacultyDashboard.css */
+
+/* ---------- General ---------- */
+body, html {
+margin: 0; padding: 0;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* background-color: #f4f6f9; */ 
+ color: #333;
+}
+
+.dashboard-container {
+display: flex;
+ flex-direction: column;
+ min-height: 100vh; 
+
+/* --- BACKGROUND IMAGE STYLES --- */
+ background-image: url('./faculty.jpg'); /* ADJUST THIS PATH */
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+ background-attachment: fixed; 
+ position: relative; 
+ z-index: 0; 
+}
+
+/* Semi-transparent overlay for better text readability */
+.dashboard-container::before {
+ content: '';
+position: absolute;
+ top: 0;
+ left: 0;
+right: 0;
+ bottom: 0;
+background-color: rgba(0, 0, 0, 0.6); /* Adjust transparency (0.0 to 1.0) as needed */
+z-index: 1; 
+}
+
+
+/* ---------- Top Navigation ---------- */
+.topnav {
+display: flex;
+align-items: center;
+justify-content: space-between; /* This is already correct to push items apart */
+background-color: rgba(28, 40, 51, 0.85);
+color: #fff;
+padding: 0 20px;
+height: 60px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+position: relative; 
+z-index: 2;
+}
+
+.topnav-title {
+font-size: 1.5rem;
+font-weight: bold;
+/* Add margin-right to push the links away */
+margin-right: auto; /* <--- ADD THIS LINE */
+}
+
+.topnav-links {
+display: flex;
+/* Remove or comment out gap: 10px; if you want them tightly packed as in the screenshot */
+/* gap: 10px; */ 
+}
+
+.topnav-button {
+display: flex;
+align-items: center;
+gap: 5px; /* Keep gap for icon and text within button */
+background: transparent;
+border: 1px solid rgba(255, 255, 255, 0.4);
+color: #fff;
+padding: 8px 12px;
+cursor: pointer;
+font-size: 0.95rem;
+border-radius: 25px;
+transition: 0.3s ease-in-out;
+/* Add margin-left to create space between buttons if gap is removed from topnav-links */
+margin-left: 10px; /* <--- ADD THIS LINE for spacing between buttons */
+}
+.logout-btn {
+ display: flex;
+ align-items: center;
+ gap: 5px;
+ background-color: #e74c3c;
+ border: none;
+ color: #fff;
+ padding: 8px 12px;
+ font-size: 0.95rem;
+ border-radius: 25px; /* Rounded pill shape */
+ cursor: pointer;
+transition: 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+ background-color: #c0392b;
+transform: translateY(-1px); /* Slight lift effect */
+}
+
+.icon {
+font-size: 1.2rem;
+}
+
+/* ---------- Main Content ---------- */
+.main-content {
+ flex: 1;
+ padding: 20px;
+  position: relative; 
+z-index: 2;
+}
+
+/* ---------- Page Titles ---------- */
+.page-title {
+font-size: 1.8rem;
+margin-bottom: 20px;
+ color: #ecf0f1; /* Lighter color for better contrast */
+ text-shadow: 1px 1px 5px rgba(0,0,0,0.8); /* Stronger text shadow for clarity */
+}
+
+/* ---------- Cards ---------- */
+.card {
+     background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white card background */
+padding: 20px;
+ margin-bottom: 20px;
+ border-radius: 8px;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Stronger shadow */
+ color: #333; 
+}
+
+/* ---------- Tables ---------- */
+.data-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin-top: 15px;
+ background-color: #fff; 
+ border-radius: 8px;
+ overflow: hidden;
+}
+
+.data-table th, .data-table td {
+ padding: 10px 12px;
+ text-align: left;
+ border-bottom: 1px solid #ddd;
+}
+
+.data-table th {
+ background-color: #e9ecef;
+ color: #495057;
+}
+
+.data-table tr:hover {
+ background-color: #e2f0ef;
+}
+
+.delete-btn {
+background-color: #e74c3c;
+ border: none;
+ color: #fff;
+ padding: 6px 10px;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: 0.2s;
+}
+
+.delete-btn:hover {
+background-color: #c0392b;
+}
+
+/* ---------- Forms ---------- */
+.add-elective-form,
+.card input,
+.card button {
+display: flex;
+ gap: 10px;
+ margin-bottom: 10px;
+ flex-wrap: wrap;
+}
+
+.card input[type="text"],
+.card input[type="number"],
+.card input[type="email"],
+.file-input {
+ padding: 8px 10px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ flex: 1;
+ min-width: 120px;
+ background-color: #fcfcfc;
+}
+
+.primary-btn {
+ background-color: #1abc9c;
+ border: none;
+ color: #fff;
+ padding: 8px 12px;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: 0.2s;
+}
+
+.primary-btn:hover {
+background-color: #16a085;
+}
+
+.success-btn {
+     background-color: #27ae60;
+border: none;
+ color: #fff;
+ padding: 8px 12px;
+ border-radius: 5px;
+ cursor: pointer;
+ margin-right: 10px;
+}
+
+.success-btn:hover {
+background-color: #1e8449;
+}
+
+.warning-btn {
+ background-color: #f39c12;
+ border: none;
+ color: #fff;
+ padding: 8px 12px;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+.warning-btn:hover {
+ background-color: #d68910;
+}
+
+/* ---------- Button Group ---------- */
+.button-group {
+ display: flex;
+ gap: 10px;
+ margin-top: 10px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+.topnav-links {
+ flex-wrap: wrap;
+gap: 5px;
+}
+ .add-elective-form {
+flex-direction: column;
+ }
+ .card input,
+ .card button {
+width: 100%;
+ }
+}

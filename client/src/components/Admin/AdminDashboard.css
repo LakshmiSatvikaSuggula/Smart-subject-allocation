@@ -1,0 +1,120 @@
+/* AdminDashboard.css */
+
+.dashboard-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-image {
+  background-image: url('college1.jpg'); /* REPLACE with your actual image URL */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Custom Navbar Background - Black with a subtle gradient */
+.bg-dark-gradient {
+  background: linear-gradient(to right, #000000, #1a1a1a); /* Black to very dark grey gradient */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white line at the bottom */
+}
+
+/* Navbar Brand & Icons */
+.navbar-brand, .navbar-nav .nav-link, .d-flex .text-white {
+    color: #ffffff !important; /* Ensure all text/icons are white */
+}
+
+/* Topnav Button Base Style */
+.btn-outline-light {
+  color: #ffffff; /* White text */
+  border-color: rgba(255, 255, 255, 0.3); /* Slightly transparent white border */
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  padding: 0.75rem 1.25rem; /* Adjusted padding for a cleaner look */
+  font-weight: 500;
+  border-radius: 0.5rem; /* Slightly rounded */
+}
+
+/* Topnav Button Hover State - Light Blue */
+.btn-outline-light:hover {
+  color: #000000; /* Dark text on hover */
+  background-color: #add8e6; /* Light blue background on hover */
+  border-color: #add8e6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Topnav Button Active State */
+.nav-btn-active {
+  background-color: #87ceeb !important; /* Sky blue background for active button */
+  color: #000000 !important; /* Dark text for active button */
+  border-color: #87ceeb !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow for active tab */
+  transform: translateY(-2px); /* Maintain lift */
+}
+
+/* Logout Button */
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  transition: all 0.3s ease-in-out;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Glassmorphism effect for cards */
+.card-glassmorphism {
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Soft, expansive shadow */
+}
+
+/* Ensuring table background is white and rounded */
+.table.bg-white {
+  background-color: #fff !important; /* Ensure white background */
+}
+
+/* General text color adjustments for inside cards */
+.card-glassmorphism h3.text-primary {
+  color: #007bff !important; /* Bootstrap primary blue */
+}
+
+.card-glassmorphism .text-secondary {
+  color: #6c757d !important; /* Bootstrap secondary grey */
+}
+
+.card-glassmorphism .text-success {
+    color: #28a745 !important;
+}
+
+.card-glassmorphism .text-danger {
+    color: #dc3545 !important;
+}
+
+.card-glassmorphism .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.card-glassmorphism .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.card-glassmorphism .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.card-glassmorphism .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}

@@ -43,14 +43,13 @@ router.get('/faculty',auth, requireRole('admin'),  async (req, res) => {
 
 // Add new faculty
 router.post('/faculty',auth, requireRole('admin'), async (req, res) => {
- const { name, email, facultyId } = req.body;
+ const { name, email, regdNo } = req.body;
   // Changed department → facultyId
   const passwordHash = await bcrypt.hash('default123', 10);
   const newFaculty = new Faculty({ 
     name, 
     email, 
-    facultyId,          // Added facultyId
-    role: 'faculty', 
+    regdNo,          // Added facultyId
     password: 'default123' 
   });
   await newFaculty.save();

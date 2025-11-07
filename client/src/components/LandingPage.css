@@ -1,0 +1,90 @@
+/* src/components/LandingPage.css */
+
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff; /* White text for contrast */
+
+  /* Background Image Setup */
+  background-image: url('/landingPage.jpg'); /* ADJUST THIS PATH */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: parallax effect */
+  position: relative;
+  z-index: 0; /* Ensure content is above overlay */
+}
+
+/* Dark overlay for better text readability */
+.landing-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Adjust transparency (0.0 to 1.0) as needed */
+  z-index: 1;
+}
+
+.landing-content {
+  position: relative; /* Position above the overlay */
+  z-index: 2;
+  max-width: 800px; /* Limit content width */
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background for content box */
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+  margin: 20px; /* Add some margin for smaller screens */
+}
+
+.landing-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.landing-content .lead {
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+}
+
+.landing-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.get-started-btn {
+  background-color: #1abc9c; /* Primary button color */
+  border-color: #1abc9c;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 30px; /* Pill shape */
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #16a085; /* Darker on hover */
+  border-color: #16a085;
+  transform: translateY(-2px); /* Slight lift */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .landing-content h1 {
+    font-size: 2.2rem;
+  }
+  .landing-content .lead {
+    font-size: 1rem;
+  }
+  .landing-content {
+    padding: 20px;
+  }
+  .get-started-btn {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}

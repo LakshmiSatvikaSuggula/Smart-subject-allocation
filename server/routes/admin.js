@@ -10,6 +10,9 @@ const PDFDocument = require("pdfkit");
 const { Parser } = require("json2csv");
 const bcrypt = require('bcrypt');
 const Faculty=require('../models/Faculty')
+const Admin=require('../models/Admin')
+const Subject=require('../models/Subject')
+const Allocation = require("../models/Allotment");
 // ---------- Academic Session Routes ----------
 
 // Get all sessions
@@ -32,6 +35,27 @@ router.put('/sessions/:id/lock', auth, requireRole('admin'), async (req, res) =>
   res.json(session);
 });
 
+// Unlock session
+router.put('/sessions/:id/unlock', auth, requireRole('admin'), async (req, res) => {
+  const session = await Session.findByIdAndUpdate(req.params.id, { locked: false }, { new: true });
+  res.json(session);
+});
+
+router.get('/profile', auth, requireRole('admin'), async (req, res) => {
+  try {
+    // ✅ Find admin by regdNo from token payload
+    const admin = await Admin.findOne({ regdNo: req.user.regdNo }).select('-password');
+
+    if (!admin) {
+      return res.status(404).json({ message: 'Admin not found' });
+    }
+
+    res.json(admin);
+  } catch (err) {
+    console.error('Profile fetch error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 // ---------- Faculty/User Management ----------
 
@@ -42,18 +66,36 @@ router.get('/faculty',auth, requireRole('admin'),  async (req, res) => {
 });
 
 // Add new faculty
-router.post('/faculty',auth, requireRole('admin'), async (req, res) => {
- const { name, email, regdNo } = req.body;
-  // Changed department → facultyId
-  const passwordHash = await bcrypt.hash('default123', 10);
-  const newFaculty = new Faculty({ 
-    name, 
-    email, 
-    regdNo,          // Added facultyId
-    password: 'default123' 
-  });
-  await newFaculty.save();
-  res.json(newFaculty);
+router.post('/faculty', auth, requireRole('admin'), async (req, res) => {
+  try {
+    const { name, email, regdNo } = req.body;
+
+    if (!name || !email || !regdNo) {
+      return res.status(400).json({ message: 'Name, email, and regdNo are required' });
+    }
+
+    // Check duplicates
+    const existing = await Faculty.findOne({ regdNo });
+    if (existing) return res.status(400).json({ message: 'Faculty already exists' });
+
+    const passwordHash = await bcrypt.hash('default123', 10);
+
+    const newFaculty = new Faculty({
+      name,
+      email,
+      regdNo,
+      passwordHash,
+      role: 'faculty'
+    });
+
+    await newFaculty.save();
+
+    res.status(201).json({ message: 'Faculty created', faculty: newFaculty });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
 });
 
 // Deactivate faculty
@@ -66,20 +108,40 @@ router.put('/faculty/:id/deactivate', auth, requireRole('admin'), async (req, re
 // ---------- Analytics ----------
 
 // Get analytics for electives
-router.get('/analytics', auth, requireRole('admin'), async (req, res) => {
-  const totalStudents = await User.countDocuments({ role: 'student' });
-  const totalSubjects = await require('../models/Subject').countDocuments();
-  const totalAllocated = await Allotment.countDocuments();
-  const totalUnallocated = totalStudents - totalAllocated;
+router.get("/analytics", auth, async (req, res) => {
+  try {
+    // Ensure only admin can access
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Access denied" });
+    }
 
-  res.json({
-    totalStudents,
-    totalSubjects,
-    totalAllocated,
-    totalUnallocated,
-  });
+    // Example analytics — adjust based on your DB structure
+    const totalStudents = await User.countDocuments();
+    const totalSubjects = await Subject.countDocuments();
+    const totalAllocated = await Allocation.countDocuments({ allocated: true });
+    const totalUnallocated = totalStudents - totalAllocated;
+
+    // Subject-wise allocation summary
+    const subjectData = await Subject.find().select("subjectName capacity allocatedCount");
+
+    const formattedSubjectData = subjectData.map(sub => ({
+      subject: sub.subjectName,
+      capacity: sub.capacity || 0,
+      allocated: sub.allocatedCount || 0
+    }));
+
+    res.json({
+      totalStudents,
+      totalSubjects,
+      totalAllocated,
+      totalUnallocated,
+      subjectData: formattedSubjectData
+    });
+  } catch (err) {
+    console.error("Analytics error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
-
 
 // ---------- Export Data ----------
 

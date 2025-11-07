@@ -94,7 +94,7 @@ app.post("/login", async (req, res) => {
   const { regdNo, password } = req.body;
 
   if (!regdNo || !password) {
-    return res.status(400).json({ message: "Username and password required" });
+    return res.status(400).json({ message: "regdNo and password required" });
   }
 
   try {
@@ -114,9 +114,10 @@ app.post("/login", async (req, res) => {
     // Verify password (assuming hashed in DB)
     const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
+      console.log(await bcrypt.hash(password,10))
       return res.status(401).json({ message: "Invalid credentials" });
     }
-
+  
     // Generate JWT token
     const payload = {
       id: user._id,
@@ -124,7 +125,7 @@ app.post("/login", async (req, res) => {
       role: student ? "student" : faculty ? "faculty" : "admin"
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "10h" });
 
     return res.json({ message: "Login successful", token, user: payload });
 

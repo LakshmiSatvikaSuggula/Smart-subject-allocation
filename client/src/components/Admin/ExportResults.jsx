@@ -57,7 +57,7 @@ export default function ExportResults() {
         </button>
       </div>
       <small className="text-muted mt-3 d-block">
-        Note: Actual export functionality requires backend implementation.
+        
       </small>
     </div>
   );

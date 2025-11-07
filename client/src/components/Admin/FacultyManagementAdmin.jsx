@@ -5,13 +5,21 @@ export default function FacultyManagementAdmin() {
   const [faculty, setFaculty] = useState([]);
   const [newFaculty, setNewFaculty] = useState({ facultyId: "", name: "", email: "" });
 
+  // Get admin token from localStorage
+  const token = localStorage.getItem("token");
+
+  // Fetch all faculty
   const fetchFaculty = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/faculty"); // Replace with your API route
+      const res = await fetch("http://localhost:5000/api/admin/faculty", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       const data = await res.json();
       setFaculty(data);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching faculty:", err);
     }
   };
 
@@ -19,26 +27,45 @@ export default function FacultyManagementAdmin() {
     fetchFaculty();
   }, []);
 
+  // Add new faculty
   const addFaculty = async () => {
     if (!newFaculty.facultyId || !newFaculty.name || !newFaculty.email) return;
+
     try {
       const res = await fetch("http://localhost:5000/api/admin/faculty", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newFaculty),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name: newFaculty.name,
+          email: newFaculty.email,
+          regdNo: newFaculty.facultyId // backend expects regdNo
+        })
       });
+
       const added = await res.json();
-      setFaculty([...faculty, added]);
-      setNewFaculty({ facultyId: "", name: "", email: "" });
+      if (res.ok) {
+        setFaculty([...faculty, added]);
+        setNewFaculty({ facultyId: "", name: "", email: "" });
+      } else {
+        console.error("Error adding faculty:", added.message);
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Error adding faculty:", err);
     }
   };
 
+  // Delete faculty
   const deleteFaculty = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/admin/faculty/${id}`, { method: "DELETE" });
-      setFaculty(faculty.filter(f => f._id !== id));
+      const res = await fetch(`http://localhost:5000/api/admin/faculty/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) setFaculty(faculty.filter(f => f._id !== id));
+      else console.error("Failed to delete faculty");
     } catch (err) {
       console.error(err);
     }
@@ -48,6 +75,7 @@ export default function FacultyManagementAdmin() {
     <div className="card shadow-lg rounded-4 p-4 mb-4 bg-light card-glassmorphism">
       <h3 className="mb-3 text-primary">Faculty Management</h3>
 
+      {/* Add Faculty Form */}
       <div className="row g-2 mb-3">
         <div className="col-md-3">
           <input
@@ -81,6 +109,7 @@ export default function FacultyManagementAdmin() {
         </div>
       </div>
 
+      {/* Faculty List Table */}
       <div className="table-responsive">
         <table className="table table-hover table-bordered align-middle bg-white rounded-3 overflow-hidden">
           <thead className="table-dark">
@@ -94,7 +123,7 @@ export default function FacultyManagementAdmin() {
           <tbody>
             {faculty.map(f => (
               <tr key={f._id}>
-                <td>{f.facultyId}</td>
+                <td>{f.regdNo}</td>
                 <td>{f.name}</td>
                 <td>{f.email}</td>
                 <td>
@@ -107,9 +136,14 @@ export default function FacultyManagementAdmin() {
                 </td>
               </tr>
             ))}
+            {faculty.length === 0 && (
+              <tr>
+                <td colSpan="4" className="text-center">No faculty found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
     </div>
-  );
-}
+  ); 
+} 

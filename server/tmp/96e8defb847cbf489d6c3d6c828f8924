@@ -1,0 +1,51 @@
+regdNo,name,Preference1,Preference2,Preference3
+231FA0001,Student1,Physics,Math,English
+231FA0002,Student2,Biology,Biology,Chemistry
+231FA0003,Student3,Physics,Art,Physics
+231FA0004,Student4,Music,Computer Science,Math
+231FA0005,Student5,Math,Physics,Biology
+231FA0006,Student6,Biology,Art,Music
+231FA0007,Student7,Math,Art,Biology
+231FA0008,Student8,Art,Computer Science,Biology
+231FA0009,Student9,Economics,Music,English
+231FA0010,Student10,Math,Chemistry,Computer Science
+231FA0011,Student11,History,English,Chemistry
+231FA0012,Student12,Biology,History,Physics
+231FA0013,Student13,Physics,Computer Science,Physics
+231FA0014,Student14,History,History,Music
+231FA0015,Student15,English,Math,Economics
+231FA0016,Student16,Art,Physics,Computer Science
+231FA0017,Student17,Physics,Art,English
+231FA0018,Student18,Music,History,Music
+231FA0019,Student19,Biology,Physics,Math
+231FA0020,Student20,Biology,English,Physics
+231FA0021,Student21,Biology,Physics,Computer Science
+231FA0022,Student22,English,Economics,History
+231FA0023,Student23,Chemistry,History,History
+231FA0024,Student24,Biology,English,Physics
+231FA0025,Student25,Music,Chemistry,Art
+231FA0026,Student26,Biology,Chemistry,Economics
+231FA0027,Student27,Computer Science,English,Art
+231FA0028,Student28,Biology,History,Math
+231FA0029,Student29,Biology,Math,History
+231FA0030,Student30,Computer Science,English,Physics
+231FA0031,Student31,Biology,Music,History
+231FA0032,Student32,Biology,Economics,Computer Science
+231FA0033,Student33,Economics,Chemistry,English
+231FA0034,Student34,Chemistry,Biology,Art
+231FA0035,Student35,Art,English,Music
+231FA0036,Student36,Computer Science,Music,Computer Science
+231FA0037,Student37,History,Biology,Chemistry
+231FA0038,Student38,Art,Economics,Physics
+231FA0039,Student39,Math,Physics,Chemistry
+231FA0040,Student40,Chemistry,Computer Science,Music
+231FA0041,Student41,Physics,Computer Science,Computer Science
+231FA0042,Student42,Music,Economics,Art
+231FA0043,Student43,English,Art,Math
+231FA0044,Student44,Physics,Art,English
+231FA0045,Student45,History,Physics,English
+231FA0046,Student46,Computer Science,Chemistry,Economics
+231FA0047,Student47,Math,English,Art
+231FA0048,Student48,Chemistry,Art,Physics
+231FA0049,Student49,English,Art,Music
+231FA0050,Student50,Biology,Chemistry,History

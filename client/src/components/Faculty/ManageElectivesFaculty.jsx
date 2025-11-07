@@ -1,37 +1,67 @@
-import React, { useState } from "react";
-// import '../../components/FacultyDashboard.css'; // Uncomment if needed
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import './FacultyDashboard.css'; // Your CSS file
 
 export default function ManageElectivesFaculty() {
-  const [electives, setElectives] = useState([
-    { code: "EL101", name: "Data Science", capacity: 50, minPercent: 70 },
-    { code: "EL102", name: "Machine Learning", capacity: 45, minPercent: 75 },
-    { code: "EL103", name: "Cyber Security", capacity: 60, minPercent: 65 },
-  ]);
+  const [electives, setElectives] = useState([]);
   const [newElective, setNewElective] = useState({ code: "", name: "", capacity: "", minPercent: "" });
 
-  const addElective = () => {
+  // Fetch electives from backend on component mount
+  useEffect(() => {
+    fetchElectives();
+  }, []);
+
+  const fetchElectives = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/electives");
+      setElectives(res.data);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to fetch electives from server");
+    }
+  };
+
+  // Add elective via backend
+  const addElective = async () => {
     if (!newElective.code || !newElective.name || !newElective.capacity) {
       alert("Please fill in all required fields (Code, Name, Capacity)");
       return;
     }
-    setElectives([...electives, { 
-      ...newElective, 
-      capacity: parseInt(newElective.capacity) || 0, // Ensure it's a number
-      minPercent: parseInt(newElective.minPercent) || 0 // Ensure it's a number
-    }]);
-    setNewElective({ code: "", name: "", capacity: "", minPercent: "" });
+
+    try {
+      const res = await axios.post("http://localhost:5000/electives", {
+        code: newElective.code,
+        name: newElective.name,
+        capacity: parseInt(newElective.capacity),
+        minPercent: parseInt(newElective.minPercent) || 0
+      });
+      setElectives([...electives, res.data]);
+      setNewElective({ code: "", name: "", capacity: "", minPercent: "" });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to add elective. Make sure the code is unique.");
+    }
   };
 
-  const deleteElective = (code) => {
+  // Delete elective via backend
+  const deleteElective = async (code) => {
     if (window.confirm(`Are you sure you want to delete elective ${code}?`)) {
-      setElectives(electives.filter(e => e.code !== code));
+      try {
+        await axios.delete(`http://localhost:5000/electives/${code}`);
+        setElectives(electives.filter(e => e.code !== code));
+      } catch (err) {
+        console.error(err);
+        alert("Failed to delete elective");
+      }
     }
   };
 
   return (
     <div>
       <h1 className="page-title">Manage Electives</h1>
-      <div className="card add-elective-form"> {/* Assuming .add-elective-form is defined */}
+
+      {/* Add Elective Form */}
+      <div className="card add-elective-form">
         <input 
           type="text" 
           placeholder="Code" 
@@ -59,7 +89,8 @@ export default function ManageElectivesFaculty() {
         <button className="primary-btn" onClick={addElective}>Add Elective</button>
       </div>
 
-      <table className="data-table"> {/* Assuming .data-table is defined */}
+      {/* Electives Table */}
+      <table className="data-table">
         <thead>
           <tr>
             <th>Code</th>
@@ -77,7 +108,7 @@ export default function ManageElectivesFaculty() {
               <td>{e.capacity}</td>
               <td>{e.minPercent}</td>
               <td>
-                <button className="delete-btn" onClick={() => deleteElective(e.code)}> {/* Assuming .delete-btn is defined */}
+                <button className="delete-btn" onClick={() => deleteElective(e.code)}>
                   Delete
                 </button>
               </td>

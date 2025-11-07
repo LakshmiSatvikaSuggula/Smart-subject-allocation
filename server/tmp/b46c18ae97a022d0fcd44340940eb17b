@@ -1,0 +1,501 @@
+regdNo,name,email,department,percentage,cgpa,dob,Preference1,Preference2,Preference3
+2023001,Melissa Harper,melissa.harper.001@college.edu,IT,91.8,9.0,2005-03-16,Cloud Computing,Networking,Power Systems
+2023002,Cynthia May,cynthia.may.002@college.edu,Electronics,78.7,7.9,2004-06-11,Networking,Data Science,Power Systems
+2023003,John Johnson,john.johnson.003@college.edu,Civil,89.0,8.9,2004-09-26,Power Systems,Control Systems,Structural Engineering
+2023004,Alicia Benitez,alicia.benitez.004@college.edu,Chemical,89.8,9.0,2004-04-05,Data Science,Cyber Security,Structural Engineering
+2023005,Kimberly Howard,kimberly.howard.005@college.edu,IT,94.4,9.2,2005-08-18,Transportation,Data Science,Web Development
+2023006,Brandi Quinn,brandi.quinn.006@college.edu,Computer Science,76.0,7.6,2005-03-25,Web Development,Cloud Computing,AI
+2023007,Jeanne Pratt,jeanne.pratt.007@college.edu,Civil,90.7,9.4,2003-03-25,Data Science,Robotics,Automotive
+2023008,Brian Gibbs,brian.gibbs.008@college.edu,Computer Science,75.1,7.5,2003-10-09,Networking,Cyber Security,Cloud Computing
+2023009,Teresa Gonzalez,teresa.gonzalez.009@college.edu,IT,92.6,9.5,2004-03-19,Transportation,Web Development,Automotive
+2023010,Daniel Bailey,daniel.bailey.010@college.edu,Civil,84.1,8.4,2004-09-30,Automotive,AI,Networking
+2023011,Christopher Barnes,christopher.barnes.011@college.edu,Mechanical,79.5,8.0,2004-07-25,Power Systems,AI,Robotics
+2023012,Alexis Gates,alexis.gates.012@college.edu,Mechanical,88.5,8.8,2005-10-30,Transportation,Networking,Web Development
+2023013,Sandy Holt,sandy.holt.013@college.edu,Electronics,86.5,8.7,2005-07-31,Robotics,Cyber Security,Web Development
+2023014,Chris Cross,chris.cross.014@college.edu,Civil,77.7,7.8,2002-12-21,Structural Engineering,Transportation,AI
+2023015,Michelle Hodge,michelle.hodge.015@college.edu,Mechanical,82.5,8.2,2004-02-04,Web Development,Power Systems,Automotive
+2023016,James Miles,james.miles.016@college.edu,Civil,88.4,8.8,2003-05-23,AI,Data Science,Cyber Security
+2023017,Robert Booker,robert.booker.017@college.edu,Electrical,92.5,9.6,2004-09-29,Transportation,AI,Automotive
+2023018,Richard Mills,richard.mills.018@college.edu,Computer Science,88.0,8.8,2004-05-27,Automotive,Transportation,Robotics
+2023019,Jessica Torres,jessica.torres.019@college.edu,Chemical,88.1,8.8,2004-10-29,Robotics,Networking,Data Science
+2023020,Sylvia Lang,sylvia.lang.020@college.edu,IT,76.1,7.6,2003-12-03,Cloud Computing,Cyber Security,Automotive
+2023021,Thomas Williams,thomas.williams.021@college.edu,Electronics,84.3,8.4,2004-02-29,Automotive,Networking,Power Systems
+2023022,Timothy Nguyen,timothy.nguyen.022@college.edu,Chemical,83.9,8.4,2004-01-30,Control Systems,Robotics,Networking
+2023023,Derek Moore,derek.moore.023@college.edu,Computer Science,93.2,9.3,2004-06-15,Transportation,Structural Engineering,Networking
+2023024,Tara Arellano,tara.arellano.024@college.edu,Electronics,80.9,8.1,2004-07-14,AI,Cloud Computing,Networking
+2023025,Greg Watson,greg.watson.025@college.edu,Electronics,87.0,8.7,2004-12-31,AI,Structural Engineering,Robotics
+2023026,Richard Allen,richard.allen.026@college.edu,Computer Science,76.6,7.7,2002-12-25,Cloud Computing,Cyber Security,Automotive
+2023027,Leah Lopez,leah.lopez.027@college.edu,IT,81.4,8.1,2005-05-05,Web Development,AI,Cloud Computing
+2023028,Tommy Rios,tommy.rios.028@college.edu,Chemical,86.4,8.6,2005-07-22,Data Science,Structural Engineering,Web Development
+2023029,Stephanie Carter,stephanie.carter.029@college.edu,Civil,79.2,7.9,2004-04-06,Control Systems,Data Science,AI
+2023030,Melissa Collins,melissa.collins.030@college.edu,Civil,84.5,8.4,2005-06-15,AI,Control Systems,Structural Engineering
+2023031,Shawn Lopez,shawn.lopez.031@college.edu,Electrical,93.4,9.0,2004-01-09,Web Development,Structural Engineering,Control Systems
+2023032,Nancy Ramos,nancy.ramos.032@college.edu,Computer Science,91.3,9.6,2003-02-13,Web Development,Networking,Cloud Computing
+2023033,Christine Brown,christine.brown.033@college.edu,Computer Science,85.7,8.6,2005-03-30,Robotics,Automotive,AI
+2023034,Ryan Bruce,ryan.bruce.034@college.edu,Electronics,77.2,7.7,2005-01-09,Networking,Structural Engineering,Transportation
+2023035,Bryan Mccarthy,bryan.mccarthy.035@college.edu,Electronics,77.7,7.8,2005-01-25,Automotive,Web Development,Cloud Computing
+2023036,Calvin Tran Jr.,calvin.tran.jr..036@college.edu,IT,76.5,7.7,2004-01-04,Transportation,Automotive,Control Systems
+2023037,Margaret Diaz,margaret.diaz.037@college.edu,Mechanical,95.3,9.8,2004-05-07,Web Development,Structural Engineering,Networking
+2023038,Anthony Lewis,anthony.lewis.038@college.edu,Electrical,85.9,8.6,2004-01-15,Web Development,Cloud Computing,Transportation
+2023039,Cynthia Turner,cynthia.turner.039@college.edu,Computer Science,83.8,8.4,2003-05-21,Web Development,AI,Transportation
+2023040,Mr. Darius Holmes,mr..darius.holmes.040@college.edu,Computer Science,86.8,8.7,2003-07-07,AI,Robotics,Power Systems
+2023041,Stephen Weber,stephen.weber.041@college.edu,Civil,79.2,7.9,2005-03-27,Structural Engineering,Cyber Security,Networking
+2023042,Suzanne Scott,suzanne.scott.042@college.edu,Electronics,78.1,7.8,2005-03-29,Power Systems,Transportation,Robotics
+2023043,Ashley Fuller,ashley.fuller.043@college.edu,Computer Science,92.3,9.1,2003-12-09,Control Systems,Cyber Security,Automotive
+2023044,Troy Campbell,troy.campbell.044@college.edu,IT,76.3,7.6,2004-11-27,Transportation,AI,Automotive
+2023045,Austin Cooper,austin.cooper.045@college.edu,Electrical,79.0,7.9,2004-04-07,Transportation,Power Systems,Structural Engineering
+2023046,Nicole Reynolds,nicole.reynolds.046@college.edu,Chemical,85.3,8.5,2005-01-22,Transportation,Data Science,Web Development
+2023047,Jasmine Shaw,jasmine.shaw.047@college.edu,Civil,77.7,7.8,2004-01-28,Cyber Security,Web Development,Automotive
+2023048,Tammy Wilson,tammy.wilson.048@college.edu,Computer Science,90.3,9.7,2005-06-01,Automotive,Control Systems,Data Science
+2023049,Mark Beasley,mark.beasley.049@college.edu,IT,82.2,8.2,2005-06-23,Cloud Computing,Cyber Security,Robotics
+2023050,Justin Martinez,justin.martinez.050@college.edu,Mechanical,82.5,8.2,2005-06-30,Robotics,Cloud Computing,Cyber Security
+2023051,Kiara King,kiara.king.051@college.edu,Electrical,76.4,7.6,2003-02-28,Web Development,Power Systems,Robotics
+2023052,Daniel Parker,daniel.parker.052@college.edu,Electronics,94.2,9.5,2004-06-29,Transportation,Robotics,Cloud Computing
+2023053,Hector Roach,hector.roach.053@college.edu,Chemical,88.7,8.9,2005-08-17,Structural Engineering,Cyber Security,Automotive
+2023054,Heather White,heather.white.054@college.edu,Mechanical,80.1,8.0,2003-06-19,Automotive,Power Systems,Structural Engineering
+2023055,Amy Kennedy,amy.kennedy.055@college.edu,IT,88.3,8.8,2005-05-22,Control Systems,Cloud Computing,Data Science
+2023056,Amanda Glover,amanda.glover.056@college.edu,Electrical,77.1,7.7,2004-07-26,Control Systems,AI,Cyber Security
+2023057,Kyle Mueller,kyle.mueller.057@college.edu,Computer Science,83.7,8.4,2004-05-15,Cloud Computing,Transportation,Networking
+2023058,Andrea Smith,andrea.smith.058@college.edu,Civil,82.7,8.3,2004-11-21,Automotive,Cyber Security,Data Science
+2023059,Jaclyn Greer,jaclyn.greer.059@college.edu,IT,77.8,7.8,2005-07-14,Automotive,AI,Structural Engineering
+2023060,Robert Lamb,robert.lamb.060@college.edu,Civil,82.7,8.3,2004-08-19,Data Science,Cloud Computing,Automotive
+2023061,Jaime Anderson,jaime.anderson.061@college.edu,Electronics,96.7,9.5,2004-03-06,AI,Data Science,Cloud Computing
+2023062,Eric Fields,eric.fields.062@college.edu,Electrical,84.5,8.4,2004-08-03,Web Development,Networking,Power Systems
+2023063,Brian Armstrong,brian.armstrong.063@college.edu,Electronics,94.7,9.4,2004-07-21,Robotics,Transportation,Networking
+2023064,Patrick Peck,patrick.peck.064@college.edu,Electronics,85.4,8.5,2005-08-21,Robotics,Control Systems,Networking
+2023065,Brad Mills,brad.mills.065@college.edu,Civil,88.3,8.8,2003-06-22,Data Science,Power Systems,Cyber Security
+2023066,Alyssa Johnson,alyssa.johnson.066@college.edu,Electrical,88.6,8.9,2004-05-11,Control Systems,Networking,Power Systems
+2023067,Anthony Kane,anthony.kane.067@college.edu,IT,80.6,8.1,2004-02-20,Cloud Computing,AI,Control Systems
+2023068,Sarah Frank,sarah.frank.068@college.edu,Electrical,87.1,8.7,2004-03-26,AI,Networking,Transportation
+2023069,Darryl Alvarez,darryl.alvarez.069@college.edu,Mechanical,87.1,8.7,2004-08-18,Data Science,Cloud Computing,Automotive
+2023070,Carol Vasquez,carol.vasquez.070@college.edu,Chemical,90.4,9.1,2004-06-23,Web Development,Automotive,Robotics
+2023071,Angela Freeman,angela.freeman.071@college.edu,IT,96.3,9.3,2003-06-23,Cloud Computing,Structural Engineering,Automotive
+2023072,Rebecca Howard,rebecca.howard.072@college.edu,Electrical,88.7,8.9,2003-01-14,Cyber Security,Power Systems,Structural Engineering
+2023073,Anthony Miles,anthony.miles.073@college.edu,Chemical,92.6,9.7,2004-05-14,Automotive,Web Development,AI
+2023074,James Mitchell,james.mitchell.074@college.edu,Civil,85.4,8.5,2005-04-03,AI,Networking,Robotics
+2023075,Sherri Walker,sherri.walker.075@college.edu,Mechanical,97.6,9.3,2005-06-14,Robotics,Power Systems,Cloud Computing
+2023076,Ethan Ward,ethan.ward.076@college.edu,Computer Science,84.9,8.5,2002-12-09,Control Systems,AI,Power Systems
+2023077,Tracy May,tracy.may.077@college.edu,Mechanical,82.0,8.2,2005-11-05,Cloud Computing,Control Systems,Transportation
+2023078,David Robbins,david.robbins.078@college.edu,Computer Science,85.7,8.6,2005-10-30,Control Systems,Transportation,Structural Engineering
+2023079,Justin Black,justin.black.079@college.edu,Chemical,85.1,8.5,2003-02-09,AI,Web Development,Cloud Computing
+2023080,Jonathan Woods,jonathan.woods.080@college.edu,Chemical,81.4,8.1,2005-05-18,Data Science,Cyber Security,Networking
+2023081,Matthew Kelly,matthew.kelly.081@college.edu,Mechanical,97.8,9.7,2004-06-29,Power Systems,Networking,Structural Engineering
+2023082,Jose Kaufman,jose.kaufman.082@college.edu,Electrical,93.6,9.1,2004-08-02,Networking,Power Systems,Transportation
+2023083,Daniel Miller,daniel.miller.083@college.edu,IT,96.3,9.9,2004-03-13,Control Systems,Structural Engineering,Robotics
+2023084,Monica Martinez,monica.martinez.084@college.edu,Electrical,85.3,8.5,2003-09-06,Control Systems,Power Systems,AI
+2023085,Lindsey Nichols,lindsey.nichols.085@college.edu,Civil,96.6,9.3,2004-08-15,Cloud Computing,Cyber Security,AI
+2023086,Ryan Rasmussen,ryan.rasmussen.086@college.edu,Electronics,88.6,8.9,2004-02-12,AI,Cloud Computing,Power Systems
+2023087,Susan Bradley,susan.bradley.087@college.edu,Computer Science,83.8,8.4,2004-10-25,Cloud Computing,Web Development,Control Systems
+2023088,Andrew Garner,andrew.garner.088@college.edu,Mechanical,89.7,9.0,2004-03-16,Transportation,Structural Engineering,Cloud Computing
+2023089,Maria Peterson,maria.peterson.089@college.edu,Civil,81.8,8.2,2003-08-27,Control Systems,AI,Cloud Computing
+2023090,William Wise,william.wise.090@college.edu,IT,90.6,9.4,2003-06-19,Transportation,AI,Robotics
+2023091,Rodney Myers,rodney.myers.091@college.edu,Chemical,89.3,8.9,2003-03-08,Transportation,Structural Engineering,Automotive
+2023092,Diane Houston,diane.houston.092@college.edu,Electronics,76.9,7.7,2004-02-10,Data Science,Transportation,Web Development
+2023093,Michael Martin,michael.martin.093@college.edu,Mechanical,77.8,7.8,2004-04-07,Web Development,Robotics,AI
+2023094,Diana Webb,diana.webb.094@college.edu,IT,88.8,8.9,2004-11-25,Data Science,Transportation,Networking
+2023095,Cindy Pennington,cindy.pennington.095@college.edu,Civil,94.6,9.8,2003-05-29,Cyber Security,AI,Networking
+2023096,Dr. Kaitlyn Valdez,dr..kaitlyn.valdez.096@college.edu,Mechanical,95.2,9.6,2004-12-22,Data Science,Networking,Automotive
+2023097,Dr. Amanda Thomas,dr..amanda.thomas.097@college.edu,Computer Science,89.9,9.0,2005-07-14,Cyber Security,AI,Web Development
+2023098,Shelley Riddle,shelley.riddle.098@college.edu,Mechanical,76.9,7.7,2004-07-09,Cloud Computing,Data Science,Networking
+2023099,Christopher Mayo,christopher.mayo.099@college.edu,Mechanical,92.5,9.8,2002-11-16,Structural Engineering,Networking,Robotics
+2023100,Martin Hodges,martin.hodges.100@college.edu,Electronics,92.7,9.8,2005-01-24,Data Science,AI,Control Systems
+2023101,Jennifer Jacobs,jennifer.jacobs.101@college.edu,Mechanical,86.7,8.7,2003-11-01,Transportation,Data Science,Cloud Computing
+2023102,Christina Porter,christina.porter.102@college.edu,Chemical,79.3,7.9,2003-03-07,AI,Power Systems,Structural Engineering
+2023103,Kimberly Green,kimberly.green.103@college.edu,Electrical,87.6,8.8,2005-06-21,Web Development,Transportation,Automotive
+2023104,Lacey Hill,lacey.hill.104@college.edu,IT,97.4,9.2,2005-09-03,Robotics,Control Systems,Structural Engineering
+2023105,Sabrina Johnson,sabrina.johnson.105@college.edu,Chemical,79.4,7.9,2003-04-17,Robotics,Automotive,Cyber Security
+2023106,Jasmine Logan,jasmine.logan.106@college.edu,IT,96.7,9.4,2004-04-18,Cyber Security,Transportation,AI
+2023107,Raven Graham,raven.graham.107@college.edu,Civil,83.7,8.4,2003-04-12,Data Science,Robotics,Web Development
+2023108,Eric Mosley,eric.mosley.108@college.edu,IT,95.9,9.5,2004-11-28,Data Science,Cyber Security,Control Systems
+2023109,Michael Berg,michael.berg.109@college.edu,Electrical,91.0,9.3,2005-06-04,Control Systems,Robotics,Data Science
+2023110,Nicholas Fernandez,nicholas.fernandez.110@college.edu,Civil,79.3,7.9,2005-07-31,Transportation,AI,Automotive
+2023111,Lisa Mercado,lisa.mercado.111@college.edu,Computer Science,96.6,9.3,2003-01-09,Web Development,Data Science,Cloud Computing
+2023112,William Fox,william.fox.112@college.edu,IT,94.6,9.2,2002-11-24,Automotive,Web Development,AI
+2023113,Kelsey Bullock,kelsey.bullock.113@college.edu,Civil,95.0,9.7,2003-06-29,Power Systems,Cloud Computing,Robotics
+2023114,Sandra Yu,sandra.yu.114@college.edu,IT,93.4,9.1,2004-04-21,Structural Engineering,Power Systems,Automotive
+2023115,John Hubbard,john.hubbard.115@college.edu,IT,96.2,9.1,2004-01-13,Networking,Web Development,AI
+2023116,Amy Mahoney,amy.mahoney.116@college.edu,Electronics,77.7,7.8,2005-01-03,Transportation,Structural Engineering,AI
+2023117,Emma Hayden,emma.hayden.117@college.edu,Civil,96.8,9.2,2004-08-27,Cyber Security,Power Systems,AI
+2023118,Joshua Smith DVM,joshua.smith.dvm.118@college.edu,Chemical,80.1,8.0,2003-05-04,Structural Engineering,Power Systems,AI
+2023119,Miss Tina Snyder,miss.tina.snyder.119@college.edu,Computer Science,87.4,8.7,2003-11-01,Transportation,AI,Cloud Computing
+2023120,Maurice Smith,maurice.smith.120@college.edu,Chemical,92.5,9.5,2003-01-01,Robotics,Transportation,Control Systems
+2023121,Kathleen Gardner,kathleen.gardner.121@college.edu,Electronics,88.9,8.9,2003-08-27,Robotics,Structural Engineering,Transportation
+2023122,Lisa Sawyer,lisa.sawyer.122@college.edu,Computer Science,90.9,9.5,2005-06-10,Cyber Security,Automotive,Control Systems
+2023123,Jason Guerrero,jason.guerrero.123@college.edu,Civil,94.8,9.6,2003-05-10,Automotive,Web Development,Cyber Security
+2023124,Meagan Olson,meagan.olson.124@college.edu,Civil,77.4,7.7,2003-05-22,Transportation,Structural Engineering,Control Systems
+2023125,Catherine Ibarra,catherine.ibarra.125@college.edu,Computer Science,97.6,9.1,2005-08-01,AI,Robotics,Control Systems
+2023126,Melissa Green,melissa.green.126@college.edu,IT,78.0,7.8,2004-12-22,Cyber Security,Cloud Computing,Automotive
+2023127,Albert Jackson,albert.jackson.127@college.edu,Chemical,77.1,7.7,2003-01-06,Transportation,Structural Engineering,Automotive
+2023128,Derrick Martin,derrick.martin.128@college.edu,Electrical,91.6,9.2,2005-02-22,Control Systems,Data Science,Transportation
+2023129,Julie Cooper,julie.cooper.129@college.edu,Chemical,75.0,7.5,2003-10-13,Transportation,Structural Engineering,Networking
+2023130,Heather Davis,heather.davis.130@college.edu,Electronics,87.3,8.7,2005-03-30,Data Science,Cloud Computing,Robotics
+2023131,Karen Berg,karen.berg.131@college.edu,Electronics,92.8,9.5,2005-05-07,Control Systems,Power Systems,Data Science
+2023132,Thomas Perez,thomas.perez.132@college.edu,Civil,93.3,9.8,2005-03-14,Automotive,Robotics,Structural Engineering
+2023133,Angela Ayala,angela.ayala.133@college.edu,IT,94.9,9.3,2004-08-20,Transportation,Data Science,Web Development
+2023134,Joshua Ochoa,joshua.ochoa.134@college.edu,Electronics,75.9,7.6,2004-05-14,Automotive,Networking,Robotics
+2023135,James Pugh,james.pugh.135@college.edu,Chemical,97.3,9.0,2003-03-29,AI,Control Systems,Power Systems
+2023136,Rick Peterson,rick.peterson.136@college.edu,IT,90.2,9.9,2003-12-10,Power Systems,Automotive,Robotics
+2023137,Jon Anderson,jon.anderson.137@college.edu,Chemical,96.7,9.0,2003-03-24,Robotics,Networking,Control Systems
+2023138,Stephanie Jones,stephanie.jones.138@college.edu,Electronics,79.9,8.0,2004-06-22,Power Systems,Cyber Security,Robotics
+2023139,Lisa Hayes,lisa.hayes.139@college.edu,IT,86.7,8.7,2004-07-01,Robotics,Networking,Transportation
+2023140,Dr. James Berry,dr..james.berry.140@college.edu,Electrical,77.2,7.7,2003-10-20,Automotive,Power Systems,Control Systems
+2023141,Amber Cole,amber.cole.141@college.edu,Civil,91.3,9.9,2004-08-23,Data Science,Web Development,Robotics
+2023142,Victor Watts,victor.watts.142@college.edu,Chemical,81.5,8.2,2004-09-04,Structural Engineering,Power Systems,Control Systems
+2023143,Chelsea Fleming,chelsea.fleming.143@college.edu,Mechanical,84.5,8.4,2004-12-01,Control Systems,Power Systems,Automotive
+2023144,Debra Mccarthy,debra.mccarthy.144@college.edu,Electrical,92.1,9.4,2003-11-04,Data Science,Automotive,Power Systems
+2023145,Ryan Edwards,ryan.edwards.145@college.edu,Mechanical,80.9,8.1,2003-08-30,Structural Engineering,Transportation,Automotive
+2023146,Ricky Allen,ricky.allen.146@college.edu,Mechanical,86.8,8.7,2004-04-22,Transportation,AI,Cyber Security
+2023147,Nicholas Dickson,nicholas.dickson.147@college.edu,Civil,88.4,8.8,2004-03-13,Automotive,Control Systems,Power Systems
+2023148,Tammy Roberts,tammy.roberts.148@college.edu,IT,79.1,7.9,2005-01-26,Robotics,Control Systems,Power Systems
+2023149,Sarah Hale,sarah.hale.149@college.edu,Electrical,96.2,9.8,2003-08-18,Web Development,AI,Robotics
+2023150,Scott Gill,scott.gill.150@college.edu,Civil,81.4,8.1,2004-02-06,Cloud Computing,Web Development,Transportation
+2023151,Michelle Powers,michelle.powers.151@college.edu,Computer Science,89.1,8.9,2003-03-16,Data Science,Transportation,Networking
+2023152,Mary Huffman,mary.huffman.152@college.edu,Civil,95.5,9.9,2002-12-26,Cyber Security,Cloud Computing,Structural Engineering
+2023153,David Santos,david.santos.153@college.edu,Electronics,76.3,7.6,2003-02-27,Cyber Security,Web Development,Networking
+2023154,Reginald Lopez,reginald.lopez.154@college.edu,Computer Science,81.1,8.1,2004-03-05,Networking,Web Development,Transportation
+2023155,Kathryn Dennis,kathryn.dennis.155@college.edu,Chemical,88.1,8.8,2004-06-10,Transportation,AI,Data Science
+2023156,Cassandra Dillon,cassandra.dillon.156@college.edu,IT,80.0,8.0,2003-01-23,Cyber Security,Data Science,Networking
+2023157,Robert Pierce,robert.pierce.157@college.edu,Mechanical,85.2,8.5,2005-06-28,Web Development,Cloud Computing,Networking
+2023158,Julie Montgomery,julie.montgomery.158@college.edu,Electrical,81.4,8.1,2005-05-07,Web Development,Power Systems,Networking
+2023159,Derek Dunn,derek.dunn.159@college.edu,Computer Science,78.4,7.8,2004-06-19,Automotive,Web Development,Cloud Computing
+2023160,Jessica Myers,jessica.myers.160@college.edu,Computer Science,84.9,8.5,2003-06-03,Control Systems,Cyber Security,Cloud Computing
+2023161,Kari Butler,kari.butler.161@college.edu,Electrical,95.8,9.9,2004-04-10,Power Systems,Web Development,Robotics
+2023162,Erin Campbell,erin.campbell.162@college.edu,Computer Science,91.4,9.2,2004-05-09,Power Systems,Cloud Computing,Cyber Security
+2023163,Jason Blankenship,jason.blankenship.163@college.edu,Chemical,77.1,7.7,2003-10-25,Web Development,Networking,AI
+2023164,Richard Martinez,richard.martinez.164@college.edu,Civil,96.4,9.7,2004-12-18,Networking,Cloud Computing,Robotics
+2023165,Brian Gilbert,brian.gilbert.165@college.edu,Electronics,90.5,9.4,2003-03-06,Cyber Security,Control Systems,Automotive
+2023166,Courtney Green,courtney.green.166@college.edu,Electronics,94.1,9.5,2005-06-02,Automotive,Cyber Security,Structural Engineering
+2023167,Tyler Schroeder,tyler.schroeder.167@college.edu,Electronics,75.7,7.6,2004-01-25,Networking,Robotics,Automotive
+2023168,Eddie Bell,eddie.bell.168@college.edu,Chemical,95.6,9.1,2003-02-05,Robotics,AI,Web Development
+2023169,Mariah Williams,mariah.williams.169@college.edu,IT,89.1,8.9,2005-06-05,Robotics,Control Systems,Transportation
+2023170,Chris Murphy,chris.murphy.170@college.edu,IT,93.4,9.8,2004-02-14,AI,Transportation,Power Systems
+2023171,James Scott,james.scott.171@college.edu,Computer Science,77.5,7.8,2003-11-02,Robotics,AI,Cloud Computing
+2023172,Bonnie Fowler,bonnie.fowler.172@college.edu,Chemical,91.6,9.8,2004-09-14,Robotics,Control Systems,Web Development
+2023173,Todd Ruiz,todd.ruiz.173@college.edu,IT,75.4,7.5,2003-08-04,Data Science,Robotics,Cyber Security
+2023174,Noah Bowman,noah.bowman.174@college.edu,Computer Science,83.6,8.4,2002-12-19,Transportation,Cloud Computing,Web Development
+2023175,Susan Gray,susan.gray.175@college.edu,IT,77.4,7.7,2005-10-01,Data Science,Cloud Computing,Networking
+2023176,Timothy Barker,timothy.barker.176@college.edu,Chemical,94.3,9.1,2004-12-25,Control Systems,Structural Engineering,Power Systems
+2023177,Kelly Solomon,kelly.solomon.177@college.edu,IT,86.4,8.6,2003-08-16,Web Development,Cyber Security,Robotics
+2023178,Gregory Romero,gregory.romero.178@college.edu,Electrical,96.7,9.3,2003-12-30,Networking,Transportation,AI
+2023179,Catherine Garner,catherine.garner.179@college.edu,Civil,88.1,8.8,2005-06-24,Cloud Computing,Automotive,Structural Engineering
+2023180,Kelly Morgan,kelly.morgan.180@college.edu,Civil,82.4,8.2,2003-12-08,Cloud Computing,AI,Structural Engineering
+2023181,Connor Owens,connor.owens.181@college.edu,Electronics,95.1,9.9,2004-04-26,Automotive,Structural Engineering,Networking
+2023182,Erika Palmer,erika.palmer.182@college.edu,Computer Science,93.2,9.9,2003-02-26,Data Science,Cloud Computing,Networking
+2023183,Benjamin Mcdaniel,benjamin.mcdaniel.183@college.edu,Civil,85.0,8.5,2005-10-14,Web Development,AI,Structural Engineering
+2023184,Justin Durham,justin.durham.184@college.edu,Civil,95.0,9.2,2002-11-18,Networking,Robotics,Transportation
+2023185,Emily Williams,emily.williams.185@college.edu,Mechanical,90.2,9.8,2005-02-13,Structural Engineering,AI,Networking
+2023186,Todd Brown,todd.brown.186@college.edu,Electronics,87.4,8.7,2005-07-12,Cyber Security,Structural Engineering,Automotive
+2023187,Jordan Allen,jordan.allen.187@college.edu,Chemical,95.4,9.6,2003-09-20,Robotics,Structural Engineering,Power Systems
+2023188,James Collins,james.collins.188@college.edu,IT,96.7,9.2,2005-07-06,Cyber Security,Cloud Computing,Networking
+2023189,Christopher Cooper,christopher.cooper.189@college.edu,Electrical,95.0,9.3,2003-10-12,Data Science,Networking,Transportation
+2023190,Jessica Navarro,jessica.navarro.190@college.edu,Electronics,92.3,9.2,2003-04-29,Control Systems,Web Development,Power Systems
+2023191,Barbara Barnett,barbara.barnett.191@college.edu,Civil,95.8,9.5,2005-05-20,Robotics,Networking,Cloud Computing
+2023192,Sara Anderson,sara.anderson.192@college.edu,Computer Science,97.5,9.3,2005-07-09,Web Development,Cloud Computing,AI
+2023193,Michael Harrington,michael.harrington.193@college.edu,Computer Science,87.5,8.8,2003-10-18,Structural Engineering,Networking,Control Systems
+2023194,Amber Grant,amber.grant.194@college.edu,Electronics,86.3,8.6,2003-05-13,Data Science,Control Systems,AI
+2023195,John King,john.king.195@college.edu,Chemical,89.3,8.9,2005-03-25,Power Systems,AI,Robotics
+2023196,Jason Robinson,jason.robinson.196@college.edu,Chemical,96.6,9.3,2003-02-08,Data Science,Structural Engineering,Power Systems
+2023197,Denise Hicks,denise.hicks.197@college.edu,Computer Science,95.9,9.3,2004-10-04,Structural Engineering,Web Development,Cyber Security
+2023198,Sandra Johnson,sandra.johnson.198@college.edu,Civil,87.9,8.8,2003-12-14,Structural Engineering,AI,Networking
+2023199,Deanna Russell,deanna.russell.199@college.edu,Civil,92.8,9.7,2005-10-29,Power Systems,Networking,Transportation
+2023200,Katherine Parsons,katherine.parsons.200@college.edu,Electronics,80.6,8.1,2005-06-14,Structural Engineering,AI,Networking
+2023201,Meghan Cole,meghan.cole.201@college.edu,Computer Science,91.5,9.9,2004-11-06,Networking,Cloud Computing,Power Systems
+2023202,Laura Brown,laura.brown.202@college.edu,Computer Science,87.8,8.8,2003-08-08,Automotive,Networking,Control Systems
+2023203,Andrew Chambers,andrew.chambers.203@college.edu,Mechanical,82.8,8.3,2003-02-03,Robotics,Structural Engineering,Web Development
+2023204,Melinda Smith,melinda.smith.204@college.edu,Chemical,87.8,8.8,2005-03-29,AI,Automotive,Transportation
+2023205,Stephanie Harris,stephanie.harris.205@college.edu,IT,91.8,9.1,2004-09-12,Cloud Computing,Cyber Security,Structural Engineering
+2023206,Mary Gomez,mary.gomez.206@college.edu,Electronics,77.8,7.8,2004-07-04,Robotics,Networking,Cloud Computing
+2023207,Kenneth Adams,kenneth.adams.207@college.edu,Chemical,76.4,7.6,2003-09-26,Cloud Computing,Transportation,Web Development
+2023208,Michael Roberts,michael.roberts.208@college.edu,IT,97.6,9.2,2003-03-25,Structural Engineering,Transportation,Control Systems
+2023209,Maureen Mcdowell,maureen.mcdowell.209@college.edu,Computer Science,92.6,9.4,2002-12-18,Transportation,Robotics,Automotive
+2023210,Candice Nelson,candice.nelson.210@college.edu,Electrical,76.6,7.7,2004-05-30,Cyber Security,Control Systems,Power Systems
+2023211,Catherine Ray,catherine.ray.211@college.edu,Computer Science,80.1,8.0,2004-01-30,AI,Transportation,Cyber Security
+2023212,Heather Moore,heather.moore.212@college.edu,Chemical,83.2,8.3,2004-03-23,Cloud Computing,Structural Engineering,Automotive
+2023213,David Hughes,david.hughes.213@college.edu,IT,82.7,8.3,2005-01-04,Power Systems,Structural Engineering,Cyber Security
+2023214,Charles Cook,charles.cook.214@college.edu,Chemical,89.1,8.9,2005-06-30,Power Systems,Data Science,Web Development
+2023215,Kenneth Grant,kenneth.grant.215@college.edu,Chemical,95.7,9.5,2004-07-06,Transportation,Power Systems,Robotics
+2023216,Tammy Williamson,tammy.williamson.216@college.edu,IT,89.3,8.9,2004-05-28,Transportation,AI,Cyber Security
+2023217,John Martin,john.martin.217@college.edu,IT,96.4,9.3,2004-12-02,Cyber Security,Data Science,AI
+2023218,Maureen Sanchez,maureen.sanchez.218@college.edu,Mechanical,78.3,7.8,2005-01-16,Automotive,Power Systems,Control Systems
+2023219,Angela Osborne,angela.osborne.219@college.edu,Electronics,91.4,9.4,2003-10-08,Web Development,Networking,Cyber Security
+2023220,Joshua Pratt,joshua.pratt.220@college.edu,Electrical,76.3,7.6,2005-04-08,Web Development,Power Systems,Cloud Computing
+2023221,Logan Dawson,logan.dawson.221@college.edu,IT,89.1,8.9,2004-03-09,Networking,Cloud Computing,Structural Engineering
+2023222,William Burch,william.burch.222@college.edu,IT,77.3,7.7,2003-11-25,Data Science,Robotics,Structural Engineering
+2023223,David Hill,david.hill.223@college.edu,Electrical,97.4,9.4,2005-08-13,Cyber Security,AI,Web Development
+2023224,Courtney Moore,courtney.moore.224@college.edu,IT,76.9,7.7,2003-08-04,Control Systems,Automotive,Power Systems
+2023225,Patrick Kerr,patrick.kerr.225@college.edu,IT,77.4,7.7,2005-09-05,AI,Power Systems,Transportation
+2023226,Lisa Stewart,lisa.stewart.226@college.edu,IT,94.5,9.9,2002-11-16,Cyber Security,Networking,Transportation
+2023227,Nancy Nelson,nancy.nelson.227@college.edu,Civil,96.7,9.2,2005-08-18,Transportation,Networking,Web Development
+2023228,James Hall,james.hall.228@college.edu,Mechanical,86.7,8.7,2003-02-09,AI,Structural Engineering,Robotics
+2023229,Thomas Peters,thomas.peters.229@college.edu,Chemical,97.2,9.1,2004-05-09,Data Science,Networking,Robotics
+2023230,Brooke Bray,brooke.bray.230@college.edu,Chemical,88.6,8.9,2005-07-03,Web Development,Cloud Computing,Cyber Security
+2023231,Shane Burnett,shane.burnett.231@college.edu,IT,76.7,7.7,2005-05-03,Automotive,Data Science,Networking
+2023232,Michele Brown,michele.brown.232@college.edu,Computer Science,93.8,9.4,2004-10-08,Automotive,Robotics,Control Systems
+2023233,Christopher Williams,christopher.williams.233@college.edu,Electronics,82.5,8.2,2004-11-15,Web Development,Cloud Computing,Transportation
+2023234,Ronald Lopez,ronald.lopez.234@college.edu,Electrical,82.8,8.3,2004-03-09,AI,Cloud Computing,Data Science
+2023235,John Lee,john.lee.235@college.edu,Mechanical,85.8,8.6,2005-04-09,Structural Engineering,Cyber Security,Power Systems
+2023236,Jonathan Allen,jonathan.allen.236@college.edu,IT,86.8,8.7,2003-12-29,Cloud Computing,Data Science,Robotics
+2023237,Annette Murray,annette.murray.237@college.edu,Civil,84.9,8.5,2004-09-22,Control Systems,Web Development,AI
+2023238,William Stevens,william.stevens.238@college.edu,IT,95.1,9.2,2005-10-03,Web Development,Power Systems,Structural Engineering
+2023239,Eric Cole,eric.cole.239@college.edu,Mechanical,78.5,7.8,2005-08-29,Robotics,Structural Engineering,AI
+2023240,Stacy Price,stacy.price.240@college.edu,Electrical,87.3,8.7,2004-09-30,Networking,Cloud Computing,AI
+2023241,John Harrison,john.harrison.241@college.edu,IT,90.3,9.3,2004-11-17,Robotics,Networking,Control Systems
+2023242,Austin Hodge,austin.hodge.242@college.edu,Computer Science,80.3,8.0,2004-09-04,Power Systems,Web Development,AI
+2023243,James Mueller,james.mueller.243@college.edu,Mechanical,76.1,7.6,2003-09-12,Data Science,Robotics,Transportation
+2023244,Peggy Young,peggy.young.244@college.edu,Electrical,91.7,9.1,2004-11-28,Web Development,Cloud Computing,Networking
+2023245,Michelle Anderson,michelle.anderson.245@college.edu,IT,96.7,9.3,2005-03-05,Networking,Power Systems,Cyber Security
+2023246,Jesus Atkinson,jesus.atkinson.246@college.edu,Mechanical,79.9,8.0,2005-01-07,Structural Engineering,Networking,Automotive
+2023247,Mary Knapp,mary.knapp.247@college.edu,IT,82.5,8.2,2005-04-14,Cyber Security,Cloud Computing,Control Systems
+2023248,Tracy Proctor,tracy.proctor.248@college.edu,Electrical,81.4,8.1,2005-08-28,Automotive,AI,Structural Engineering
+2023249,Jennifer Blanchard,jennifer.blanchard.249@college.edu,Electronics,90.8,9.9,2005-01-14,Structural Engineering,Power Systems,Web Development
+2023250,Rick Dixon,rick.dixon.250@college.edu,Chemical,96.5,9.8,2003-04-07,Structural Engineering,Control Systems,AI
+2023251,Marissa Stewart,marissa.stewart.251@college.edu,Chemical,77.4,7.7,2004-08-01,Automotive,Web Development,Cloud Computing
+2023252,Megan Wang,megan.wang.252@college.edu,Chemical,76.3,7.6,2005-04-06,Control Systems,Robotics,Automotive
+2023253,Carolyn Williams,carolyn.williams.253@college.edu,Electrical,88.9,8.9,2003-02-01,Data Science,Robotics,Structural Engineering
+2023254,Michael Zimmerman,michael.zimmerman.254@college.edu,Mechanical,87.5,8.8,2003-08-25,Cyber Security,Control Systems,Cloud Computing
+2023255,Diana Sherman,diana.sherman.255@college.edu,Electronics,96.9,9.8,2002-11-14,Web Development,AI,Control Systems
+2023256,Donna Vega,donna.vega.256@college.edu,Civil,78.0,7.8,2002-11-15,Power Systems,Networking,Cyber Security
+2023257,Monique Shaw,monique.shaw.257@college.edu,Mechanical,85.5,8.6,2004-11-06,Networking,Structural Engineering,Control Systems
+2023258,Sarah Bautista DDS,sarah.bautista.dds.258@college.edu,Civil,76.1,7.6,2005-08-05,Web Development,Automotive,Transportation
+2023259,Paula Campbell,paula.campbell.259@college.edu,Computer Science,88.9,8.9,2003-07-10,Cyber Security,Robotics,Web Development
+2023260,Kenneth Williams,kenneth.williams.260@college.edu,IT,94.5,9.2,2005-10-29,Networking,Cloud Computing,Structural Engineering
+2023261,Jacob Christensen,jacob.christensen.261@college.edu,Electronics,79.0,7.9,2005-08-15,Transportation,Control Systems,Cloud Computing
+2023262,Joanna Ortiz,joanna.ortiz.262@college.edu,Electrical,82.9,8.3,2005-06-15,Networking,Web Development,Automotive
+2023263,Lori Benson,lori.benson.263@college.edu,Civil,77.4,7.7,2004-02-01,Networking,Power Systems,Robotics
+2023264,Beverly Velasquez,beverly.velasquez.264@college.edu,Electrical,86.0,8.6,2005-08-02,AI,Data Science,Structural Engineering
+2023265,Jeanette Garrison,jeanette.garrison.265@college.edu,IT,83.9,8.4,2005-08-14,AI,Networking,Structural Engineering
+2023266,Chad Ortiz,chad.ortiz.266@college.edu,Computer Science,82.4,8.2,2003-05-21,AI,Cyber Security,Transportation
+2023267,Kristen Christian,kristen.christian.267@college.edu,Electronics,86.4,8.6,2004-09-18,Structural Engineering,Transportation,Automotive
+2023268,Frank Garrison,frank.garrison.268@college.edu,Electronics,87.0,8.7,2003-09-25,Automotive,Structural Engineering,Data Science
+2023269,James Freeman,james.freeman.269@college.edu,IT,80.2,8.0,2003-06-30,Control Systems,Robotics,Cloud Computing
+2023270,Edwin Wilson,edwin.wilson.270@college.edu,Chemical,79.4,7.9,2004-03-04,AI,Web Development,Power Systems
+2023271,Barbara Allen,barbara.allen.271@college.edu,Mechanical,79.3,7.9,2005-07-14,Automotive,Cyber Security,Cloud Computing
+2023272,Cindy Moore,cindy.moore.272@college.edu,Electrical,81.1,8.1,2004-02-29,Power Systems,Control Systems,Web Development
+2023273,Jenna Roberts,jenna.roberts.273@college.edu,Electronics,78.3,7.8,2003-05-30,Cloud Computing,Control Systems,Web Development
+2023274,John Reynolds,john.reynolds.274@college.edu,Chemical,84.3,8.4,2003-10-31,Cloud Computing,Transportation,Power Systems
+2023275,Elizabeth Horton,elizabeth.horton.275@college.edu,Civil,97.0,9.2,2005-07-10,AI,Networking,Web Development
+2023276,Joshua Powers,joshua.powers.276@college.edu,Electrical,91.1,9.6,2005-01-27,Cyber Security,AI,Automotive
+2023277,Jessica Jenkins,jessica.jenkins.277@college.edu,IT,93.9,9.0,2003-02-18,Robotics,Control Systems,Cyber Security
+2023278,Connie Hicks,connie.hicks.278@college.edu,Mechanical,78.0,7.8,2003-03-14,Data Science,Robotics,Power Systems
+2023279,John Lopez,john.lopez.279@college.edu,Electrical,89.6,9.0,2004-05-19,Data Science,Structural Engineering,Robotics
+2023280,Reginald Hobbs,reginald.hobbs.280@college.edu,Computer Science,85.6,8.6,2003-05-05,Power Systems,Web Development,Robotics
+2023281,Jerry Franklin,jerry.franklin.281@college.edu,Electrical,85.9,8.6,2005-07-24,Structural Engineering,Cyber Security,Web Development
+2023282,Luis Hardin,luis.hardin.282@college.edu,Computer Science,84.8,8.5,2005-06-07,Automotive,AI,Web Development
+2023283,Brianna Weaver,brianna.weaver.283@college.edu,IT,79.5,8.0,2005-05-10,Power Systems,Networking,Robotics
+2023284,Heather Pierce,heather.pierce.284@college.edu,Electronics,81.7,8.2,2003-08-22,Structural Engineering,Automotive,Cloud Computing
+2023285,Michael Gibson,michael.gibson.285@college.edu,Electronics,83.8,8.4,2005-03-10,Robotics,Web Development,Cloud Computing
+2023286,Christopher Clark,christopher.clark.286@college.edu,Electronics,86.5,8.7,2005-09-30,Networking,Automotive,Transportation
+2023287,Alicia Perez,alicia.perez.287@college.edu,Chemical,82.9,8.3,2003-06-01,Control Systems,AI,Networking
+2023288,Dustin Wright,dustin.wright.288@college.edu,Electrical,84.6,8.5,2004-09-21,Automotive,Web Development,Structural Engineering
+2023289,Carolyn Spencer,carolyn.spencer.289@college.edu,Computer Science,84.3,8.4,2004-09-01,Structural Engineering,Automotive,Web Development
+2023290,Donald Wiggins,donald.wiggins.290@college.edu,Civil,97.2,9.1,2003-10-12,Networking,Web Development,Structural Engineering
+2023291,Michael Lopez,michael.lopez.291@college.edu,Computer Science,81.1,8.1,2003-05-18,Structural Engineering,Cloud Computing,Power Systems
+2023292,John Schneider,john.schneider.292@college.edu,Mechanical,82.6,8.3,2005-03-27,Robotics,Control Systems,AI
+2023293,Lauren Moore,lauren.moore.293@college.edu,Electronics,94.7,9.4,2005-06-25,Transportation,AI,Power Systems
+2023294,James Smith,james.smith.294@college.edu,Electronics,96.3,9.7,2004-07-22,Cyber Security,Cloud Computing,Data Science
+2023295,Catherine Mccarthy,catherine.mccarthy.295@college.edu,Chemical,89.2,8.9,2004-11-11,Automotive,Cloud Computing,Data Science
+2023296,Christina Mckenzie,christina.mckenzie.296@college.edu,Chemical,87.1,8.7,2003-03-30,Robotics,Web Development,Cloud Computing
+2023297,Michael Brown,michael.brown.297@college.edu,IT,89.8,9.0,2003-08-09,Web Development,Structural Engineering,Control Systems
+2023298,Jill Perez,jill.perez.298@college.edu,Civil,91.8,9.4,2004-10-08,Networking,Web Development,Automotive
+2023299,Anthony Thompson,anthony.thompson.299@college.edu,Chemical,81.1,8.1,2004-10-08,Web Development,Networking,Automotive
+2023300,Carl Peterson,carl.peterson.300@college.edu,Electrical,94.0,9.1,2003-08-30,Structural Engineering,Power Systems,AI
+2023301,Todd Jackson,todd.jackson.301@college.edu,Computer Science,94.4,9.8,2005-07-08,Data Science,AI,Web Development
+2023302,Richard Horne,richard.horne.302@college.edu,Computer Science,95.7,9.8,2004-06-12,Transportation,AI,Robotics
+2023303,Angela Oliver,angela.oliver.303@college.edu,Mechanical,81.6,8.2,2003-12-28,Automotive,Power Systems,Transportation
+2023304,David Huffman,david.huffman.304@college.edu,Mechanical,97.9,9.6,2004-12-01,Automotive,Structural Engineering,Networking
+2023305,Derrick Reid,derrick.reid.305@college.edu,Mechanical,86.0,8.6,2004-09-14,Power Systems,Structural Engineering,Data Science
+2023306,Dustin Reed,dustin.reed.306@college.edu,Mechanical,95.0,9.6,2004-06-18,Structural Engineering,Cloud Computing,Control Systems
+2023307,Erica Goodman,erica.goodman.307@college.edu,Computer Science,82.8,8.3,2003-06-29,Networking,Transportation,Data Science
+2023308,Christine Roberts,christine.roberts.308@college.edu,Civil,86.5,8.7,2005-06-05,Automotive,AI,Web Development
+2023309,Brian Richardson,brian.richardson.309@college.edu,Electronics,94.6,9.9,2004-02-21,Control Systems,Web Development,AI
+2023310,Monique Sanchez,monique.sanchez.310@college.edu,IT,94.4,9.8,2003-06-23,Data Science,Power Systems,Transportation
+2023311,Jennifer Peterson,jennifer.peterson.311@college.edu,Mechanical,75.8,7.6,2004-03-08,AI,Cyber Security,Structural Engineering
+2023312,Christopher Henderson,christopher.henderson.312@college.edu,Electronics,78.2,7.8,2005-05-06,Structural Engineering,Cyber Security,Robotics
+2023313,Samuel Oliver,samuel.oliver.313@college.edu,IT,93.4,9.9,2005-03-24,Transportation,Robotics,Web Development
+2023314,John Mathis,john.mathis.314@college.edu,Chemical,83.7,8.4,2003-10-23,Web Development,Automotive,Structural Engineering
+2023315,Bridget Soto,bridget.soto.315@college.edu,Electrical,83.9,8.4,2005-07-27,Automotive,Power Systems,Robotics
+2023316,Sandra Brown,sandra.brown.316@college.edu,IT,89.9,9.0,2004-10-19,Automotive,Cyber Security,Power Systems
+2023317,Alicia Williams,alicia.williams.317@college.edu,Electronics,88.8,8.9,2004-05-30,Data Science,Cyber Security,AI
+2023318,Renee Chapman,renee.chapman.318@college.edu,Chemical,89.5,8.9,2003-07-08,Data Science,Structural Engineering,Automotive
+2023319,Timothy Moore,timothy.moore.319@college.edu,Mechanical,89.6,9.0,2003-07-27,Cloud Computing,Data Science,AI
+2023320,Andrew Bryant,andrew.bryant.320@college.edu,IT,78.7,7.9,2003-09-07,Web Development,Cloud Computing,Networking
+2023321,Joe Snyder PhD,joe.snyder.phd.321@college.edu,Chemical,82.0,8.2,2003-12-18,Structural Engineering,Cyber Security,Web Development
+2023322,Alexander Riddle,alexander.riddle.322@college.edu,Chemical,90.7,9.1,2002-12-01,Robotics,Control Systems,Web Development
+2023323,Darryl Wells,darryl.wells.323@college.edu,Electrical,90.8,9.9,2004-10-07,Transportation,Networking,Power Systems
+2023324,Kevin Johnson,kevin.johnson.324@college.edu,Mechanical,94.4,9.3,2004-11-28,Cyber Security,Control Systems,Networking
+2023325,Angel King,angel.king.325@college.edu,Mechanical,93.1,9.0,2004-02-04,AI,Cloud Computing,Robotics
+2023326,Beth Cox MD,beth.cox.md.326@college.edu,Computer Science,89.5,8.9,2004-05-22,Transportation,Power Systems,Structural Engineering
+2023327,Bonnie Powell,bonnie.powell.327@college.edu,Chemical,91.2,9.1,2003-01-08,AI,Transportation,Structural Engineering
+2023328,Brian Murray,brian.murray.328@college.edu,IT,87.4,8.7,2004-06-21,Web Development,Automotive,Transportation
+2023329,Michelle Garcia,michelle.garcia.329@college.edu,Civil,97.1,9.4,2004-09-20,Networking,Data Science,Cyber Security
+2023330,Joshua Hamilton,joshua.hamilton.330@college.edu,Electronics,82.8,8.3,2005-09-25,Robotics,Transportation,Power Systems
+2023331,Lucas Sims,lucas.sims.331@college.edu,Computer Science,96.6,9.6,2005-10-31,Cloud Computing,Automotive,Data Science
+2023332,Susan Jones,susan.jones.332@college.edu,Civil,82.8,8.3,2004-02-25,Cyber Security,Networking,Control Systems
+2023333,Kimberly Allen,kimberly.allen.333@college.edu,Electronics,93.0,9.7,2005-10-22,Control Systems,Structural Engineering,AI
+2023334,Kayla Turner,kayla.turner.334@college.edu,IT,97.5,9.5,2003-10-27,Control Systems,Structural Engineering,Web Development
+2023335,Judith Smith,judith.smith.335@college.edu,IT,97.1,9.2,2003-12-06,Control Systems,Networking,Transportation
+2023336,Matthew Crawford,matthew.crawford.336@college.edu,Computer Science,89.4,8.9,2005-06-06,Web Development,AI,Transportation
+2023337,Mr. Kyle Smith DVM,mr..kyle.smith.dvm.337@college.edu,Electrical,75.4,7.5,2005-01-01,Structural Engineering,Robotics,AI
+2023338,Lori Juarez,lori.juarez.338@college.edu,IT,90.5,9.7,2005-06-18,Data Science,Robotics,Power Systems
+2023339,Lisa Wheeler,lisa.wheeler.339@college.edu,IT,85.8,8.6,2005-03-27,Networking,AI,Cloud Computing
+2023340,Ralph Villarreal,ralph.villarreal.340@college.edu,IT,87.8,8.8,2003-02-10,Cyber Security,Networking,Power Systems
+2023341,Richard Henry,richard.henry.341@college.edu,Electronics,95.1,9.2,2004-01-07,AI,Robotics,Cyber Security
+2023342,Melissa Perry,melissa.perry.342@college.edu,Civil,96.7,9.3,2003-11-20,Transportation,Automotive,Structural Engineering
+2023343,Holly Torres,holly.torres.343@college.edu,Civil,75.1,7.5,2003-11-19,Transportation,Data Science,Web Development
+2023344,Juan Frederick,juan.frederick.344@college.edu,Mechanical,89.5,8.9,2004-04-21,Automotive,Robotics,Cloud Computing
+2023345,Amanda Hudson,amanda.hudson.345@college.edu,Electronics,95.8,9.2,2004-09-05,Cloud Computing,Transportation,Data Science
+2023346,Jessica Ortiz,jessica.ortiz.346@college.edu,Civil,95.6,9.2,2005-01-14,Cyber Security,Transportation,Cloud Computing
+2023347,Carol Lucas,carol.lucas.347@college.edu,Computer Science,77.3,7.7,2003-03-04,AI,Networking,Cyber Security
+2023348,Tammy Mccall,tammy.mccall.348@college.edu,Computer Science,97.7,9.1,2003-04-06,Robotics,Transportation,Cloud Computing
+2023349,Robert Cook,robert.cook.349@college.edu,Chemical,90.9,9.4,2003-05-18,AI,Power Systems,Cloud Computing
+2023350,Mary Buckley,mary.buckley.350@college.edu,Mechanical,97.4,9.4,2005-01-26,Networking,Automotive,Transportation
+2023351,Stacy Johnson,stacy.johnson.351@college.edu,IT,79.7,8.0,2005-04-06,Cloud Computing,Automotive,Control Systems
+2023352,Jill Cooper,jill.cooper.352@college.edu,Electrical,80.9,8.1,2005-02-11,Cloud Computing,Transportation,Robotics
+2023353,Richard Ramirez,richard.ramirez.353@college.edu,Chemical,76.9,7.7,2004-11-30,Structural Engineering,AI,Networking
+2023354,Roy Ryan,roy.ryan.354@college.edu,IT,77.9,7.8,2003-03-10,Structural Engineering,Networking,Data Science
+2023355,Paula White,paula.white.355@college.edu,Civil,80.1,8.0,2005-02-02,Web Development,AI,Automotive
+2023356,Jody Wong,jody.wong.356@college.edu,Electrical,83.4,8.3,2003-02-09,Control Systems,Cyber Security,Networking
+2023357,Russell Osborn,russell.osborn.357@college.edu,IT,91.7,9.2,2005-06-20,AI,Data Science,Power Systems
+2023358,Elijah Bentley,elijah.bentley.358@college.edu,Computer Science,91.6,9.5,2005-04-23,Automotive,Transportation,Web Development
+2023359,Michael Peterson,michael.peterson.359@college.edu,Civil,84.8,8.5,2004-10-17,Data Science,Power Systems,Networking
+2023360,Kaitlin Park,kaitlin.park.360@college.edu,IT,82.8,8.3,2003-02-14,Cloud Computing,Web Development,AI
+2023361,Ryan Fischer,ryan.fischer.361@college.edu,IT,92.4,9.1,2004-01-19,AI,Power Systems,Control Systems
+2023362,Rick Rodriguez,rick.rodriguez.362@college.edu,Mechanical,90.8,9.1,2004-08-03,Cloud Computing,Robotics,Power Systems
+2023363,Ashley Arnold DDS,ashley.arnold.dds.363@college.edu,Electrical,78.7,7.9,2005-08-09,Cloud Computing,Web Development,Networking
+2023364,Stacey Watts,stacey.watts.364@college.edu,IT,95.0,9.1,2005-05-22,Cloud Computing,Web Development,Transportation
+2023365,Elizabeth Taylor,elizabeth.taylor.365@college.edu,Electronics,91.0,9.7,2004-03-28,Cyber Security,AI,Cloud Computing
+2023366,Tonya Watson,tonya.watson.366@college.edu,Civil,92.9,9.6,2004-12-27,Cloud Computing,Data Science,Control Systems
+2023367,Adrienne Mullins,adrienne.mullins.367@college.edu,IT,92.0,9.8,2003-04-21,AI,Cloud Computing,Web Development
+2023368,Johnny Paul,johnny.paul.368@college.edu,Civil,78.1,7.8,2005-05-23,Structural Engineering,Automotive,Control Systems
+2023369,Carl Dennis PhD,carl.dennis.phd.369@college.edu,Electronics,75.9,7.6,2004-07-03,Networking,AI,Cyber Security
+2023370,Eric Eaton,eric.eaton.370@college.edu,Electrical,86.4,8.6,2004-10-24,Structural Engineering,Transportation,Cyber Security
+2023371,Terri Young,terri.young.371@college.edu,Computer Science,80.5,8.1,2005-08-16,Cloud Computing,Networking,Power Systems
+2023372,Lisa Ingram,lisa.ingram.372@college.edu,Electronics,96.1,9.1,2004-12-01,Power Systems,Web Development,AI
+2023373,Jared Henderson,jared.henderson.373@college.edu,Chemical,83.6,8.4,2002-12-09,Transportation,AI,Web Development
+2023374,Paul Myers,paul.myers.374@college.edu,Computer Science,93.8,9.1,2003-01-06,Power Systems,Web Development,Control Systems
+2023375,Jacqueline White,jacqueline.white.375@college.edu,Computer Science,94.2,9.7,2005-07-09,Cyber Security,AI,Web Development
+2023376,Matthew Morales,matthew.morales.376@college.edu,Electronics,76.5,7.7,2005-09-05,Data Science,Automotive,Structural Engineering
+2023377,Amber Johnson,amber.johnson.377@college.edu,Electrical,79.9,8.0,2003-03-27,Automotive,Data Science,AI
+2023378,Terri Jones,terri.jones.378@college.edu,Mechanical,77.3,7.7,2003-06-14,Networking,Web Development,Robotics
+2023379,Jason Patterson,jason.patterson.379@college.edu,Mechanical,88.8,8.9,2003-09-14,Power Systems,Automotive,AI
+2023380,Aaron George,aaron.george.380@college.edu,Chemical,83.0,8.3,2004-06-10,Cloud Computing,Power Systems,Control Systems
+2023381,Martin Hicks,martin.hicks.381@college.edu,Electronics,80.5,8.1,2004-09-25,Automotive,Cloud Computing,Cyber Security
+2023382,Mr. Jay Dominguez Jr.,mr..jay.dominguez.jr..382@college.edu,Mechanical,80.8,8.1,2004-02-08,Cloud Computing,Control Systems,Automotive
+2023383,Stephen Harrington,stephen.harrington.383@college.edu,Civil,91.3,9.3,2004-04-06,Networking,Structural Engineering,Control Systems
+2023384,Lori Finley,lori.finley.384@college.edu,Mechanical,78.9,7.9,2003-03-21,Automotive,Cloud Computing,Web Development
+2023385,Denise Merritt,denise.merritt.385@college.edu,Civil,81.5,8.2,2003-01-12,Web Development,AI,Data Science
+2023386,Tammy Thomas,tammy.thomas.386@college.edu,Mechanical,81.0,8.1,2003-09-05,AI,Transportation,Robotics
+2023387,Sandra Bell,sandra.bell.387@college.edu,Electronics,90.9,9.4,2003-12-13,Networking,Cyber Security,Cloud Computing
+2023388,Linda Odonnell,linda.odonnell.388@college.edu,Computer Science,88.1,8.8,2005-06-22,Networking,Cloud Computing,Robotics
+2023389,Stephanie Garcia,stephanie.garcia.389@college.edu,Civil,88.1,8.8,2003-12-02,Data Science,Robotics,Structural Engineering
+2023390,Dylan Lambert,dylan.lambert.390@college.edu,Computer Science,96.2,9.9,2004-11-21,Control Systems,Cloud Computing,Cyber Security
+2023391,Timothy Campbell,timothy.campbell.391@college.edu,IT,76.7,7.7,2003-01-22,Networking,Automotive,Cloud Computing
+2023392,Becky Lawson,becky.lawson.392@college.edu,Civil,83.5,8.3,2005-04-29,Automotive,Cyber Security,Structural Engineering
+2023393,Dana Hull,dana.hull.393@college.edu,Mechanical,92.2,9.6,2003-10-19,Structural Engineering,Robotics,Web Development
+2023394,Rachel Gonzalez,rachel.gonzalez.394@college.edu,Computer Science,89.6,9.0,2004-03-08,Web Development,Power Systems,Robotics
+2023395,Jacqueline Green,jacqueline.green.395@college.edu,Computer Science,84.5,8.4,2004-12-17,Control Systems,Web Development,Data Science
+2023396,Tracey Snyder,tracey.snyder.396@college.edu,Computer Science,83.7,8.4,2003-10-23,Structural Engineering,Control Systems,Web Development
+2023397,Sarah Wang,sarah.wang.397@college.edu,Mechanical,88.1,8.8,2003-11-06,Control Systems,Cyber Security,Power Systems
+2023398,Jason Henderson,jason.henderson.398@college.edu,IT,75.2,7.5,2005-01-16,Transportation,Cyber Security,Data Science
+2023399,Abigail Bailey,abigail.bailey.399@college.edu,Computer Science,97.2,9.6,2005-08-21,Web Development,Robotics,Power Systems
+2023400,Andre Cabrera,andre.cabrera.400@college.edu,Civil,91.1,9.1,2005-09-13,AI,Robotics,Cyber Security
+2023401,Shelby Moreno,shelby.moreno.401@college.edu,Computer Science,82.9,8.3,2003-10-02,AI,Data Science,Networking
+2023402,David Brown,david.brown.402@college.edu,Mechanical,90.2,9.2,2002-11-17,Control Systems,Robotics,Networking
+2023403,Kenneth Clark,kenneth.clark.403@college.edu,Electrical,79.0,7.9,2003-04-29,Transportation,Data Science,Robotics
+2023404,Andrew Nguyen,andrew.nguyen.404@college.edu,Computer Science,90.6,9.5,2003-09-05,Data Science,Structural Engineering,Web Development
+2023405,Ashley Aguilar,ashley.aguilar.405@college.edu,Computer Science,94.6,9.4,2003-05-08,Web Development,Networking,Automotive
+2023406,Jackson Diaz,jackson.diaz.406@college.edu,Electrical,76.6,7.7,2005-09-03,AI,Networking,Control Systems
+2023407,Travis Sanchez,travis.sanchez.407@college.edu,Chemical,94.0,9.3,2005-09-15,Web Development,Automotive,AI
+2023408,Melissa Smith,melissa.smith.408@college.edu,Electronics,93.1,9.6,2003-02-04,Transportation,Automotive,Cloud Computing
+2023409,Brooke Norman,brooke.norman.409@college.edu,Mechanical,88.4,8.8,2005-07-10,Cyber Security,AI,Networking
+2023410,Brett Rivera,brett.rivera.410@college.edu,Electrical,92.4,9.4,2004-10-09,Data Science,Structural Engineering,Cloud Computing
+2023411,Teresa Parrish,teresa.parrish.411@college.edu,Computer Science,78.6,7.9,2005-04-07,Robotics,Automotive,Networking
+2023412,Joshua Hines,joshua.hines.412@college.edu,Computer Science,96.5,9.5,2005-05-26,Robotics,Networking,Cloud Computing
+2023413,Mr. Garrett Lopez,mr..garrett.lopez.413@college.edu,Mechanical,78.6,7.9,2005-05-27,Networking,Structural Engineering,Power Systems
+2023414,Michele Brown,michele.brown.414@college.edu,IT,82.5,8.2,2004-01-08,Structural Engineering,Data Science,Cyber Security
+2023415,Heather Gray,heather.gray.415@college.edu,Computer Science,90.0,9.2,2005-09-10,Networking,Robotics,Cyber Security
+2023416,Victoria Lyons,victoria.lyons.416@college.edu,Mechanical,82.7,8.3,2002-11-20,Data Science,Control Systems,Automotive
+2023417,Jason Diaz,jason.diaz.417@college.edu,Chemical,86.3,8.6,2005-09-23,Robotics,Data Science,Automotive
+2023418,Laurie Dunn,laurie.dunn.418@college.edu,Computer Science,76.2,7.6,2003-10-01,Transportation,Structural Engineering,AI
+2023419,Jeremy Clark,jeremy.clark.419@college.edu,Electronics,85.9,8.6,2003-02-11,AI,Automotive,Cloud Computing
+2023420,Jeffery Montoya,jeffery.montoya.420@college.edu,Civil,96.1,9.7,2005-08-19,Cloud Computing,Networking,Cyber Security
+2023421,Andrew Wiggins,andrew.wiggins.421@college.edu,Chemical,78.3,7.8,2005-07-05,Power Systems,Transportation,Automotive
+2023422,Kimberly Diaz,kimberly.diaz.422@college.edu,IT,80.4,8.0,2003-01-01,Power Systems,Cyber Security,Cloud Computing
+2023423,Mark Irwin,mark.irwin.423@college.edu,Civil,92.6,9.7,2002-12-29,Web Development,Robotics,Networking
+2023424,Alejandra Parker,alejandra.parker.424@college.edu,Electrical,77.3,7.7,2004-06-23,Power Systems,Cyber Security,Structural Engineering
+2023425,Miguel Coleman,miguel.coleman.425@college.edu,Electronics,76.1,7.6,2004-10-02,Web Development,Control Systems,Data Science
+2023426,Maria Vasquez,maria.vasquez.426@college.edu,Electronics,80.5,8.1,2003-12-04,Data Science,Power Systems,Networking
+2023427,Miss Susan Moore,miss.susan.moore.427@college.edu,IT,89.0,8.9,2003-02-05,Networking,Control Systems,Robotics
+2023428,Kristen Robinson DDS,kristen.robinson.dds.428@college.edu,Civil,95.1,9.1,2005-11-06,Cloud Computing,Automotive,Transportation
+2023429,Brandy Sherman,brandy.sherman.429@college.edu,Electrical,82.8,8.3,2004-06-25,Cyber Security,Automotive,Transportation
+2023430,Joseph Greene,joseph.greene.430@college.edu,Electronics,77.9,7.8,2003-09-14,Power Systems,Web Development,Robotics
+2023431,Wanda Davis,wanda.davis.431@college.edu,Computer Science,80.0,8.0,2002-12-11,Cyber Security,Cloud Computing,AI
+2023432,Sean Romero,sean.romero.432@college.edu,Computer Science,80.8,8.1,2003-12-23,Automotive,Cloud Computing,Structural Engineering
+2023433,Thomas Nash,thomas.nash.433@college.edu,IT,94.2,9.4,2003-09-29,Robotics,Control Systems,Data Science
+2023434,Courtney Crawford,courtney.crawford.434@college.edu,Electrical,85.2,8.5,2005-05-13,Automotive,Networking,Robotics
+2023435,Sarah Parrish,sarah.parrish.435@college.edu,Electrical,84.2,8.4,2005-06-02,Web Development,Robotics,Control Systems
+2023436,Tanner Schroeder,tanner.schroeder.436@college.edu,Mechanical,97.1,9.2,2004-04-07,Power Systems,Data Science,Automotive
+2023437,Heather Murray,heather.murray.437@college.edu,Computer Science,88.8,8.9,2004-08-09,Power Systems,Structural Engineering,Automotive
+2023438,Jennifer Wilson,jennifer.wilson.438@college.edu,Computer Science,91.3,9.3,2004-11-20,Power Systems,Networking,Automotive
+2023439,David Hamilton,david.hamilton.439@college.edu,Mechanical,87.8,8.8,2004-08-23,Automotive,Robotics,Cloud Computing
+2023440,Kevin Zimmerman,kevin.zimmerman.440@college.edu,Computer Science,77.8,7.8,2004-10-05,Automotive,Robotics,Control Systems
+2023441,Sierra Shields,sierra.shields.441@college.edu,Computer Science,76.6,7.7,2005-10-24,Transportation,Control Systems,Robotics
+2023442,Holly Bender,holly.bender.442@college.edu,IT,79.6,8.0,2003-06-11,Networking,Transportation,Structural Engineering
+2023443,Raymond Mcdonald,raymond.mcdonald.443@college.edu,Civil,81.0,8.1,2003-12-23,Networking,Control Systems,Cloud Computing
+2023444,Justin Edwards,justin.edwards.444@college.edu,Chemical,96.8,9.0,2003-09-28,Structural Engineering,Power Systems,Robotics
+2023445,Brenda Hall,brenda.hall.445@college.edu,Electronics,90.5,9.7,2002-11-13,Cyber Security,Structural Engineering,Control Systems
+2023446,Kyle Baker,kyle.baker.446@college.edu,Computer Science,89.9,9.0,2005-07-15,Structural Engineering,Cyber Security,Cloud Computing
+2023447,Darlene Rodriguez,darlene.rodriguez.447@college.edu,IT,79.4,7.9,2003-01-21,Control Systems,Cloud Computing,Automotive
+2023448,Roy Diaz,roy.diaz.448@college.edu,IT,90.5,9.6,2005-04-20,Control Systems,Networking,Power Systems
+2023449,Jordan Lucero,jordan.lucero.449@college.edu,Computer Science,78.3,7.8,2002-12-01,Control Systems,Transportation,Networking
+2023450,William Lane,william.lane.450@college.edu,Electrical,86.2,8.6,2003-05-23,Networking,Data Science,AI
+2023451,Jason Valdez,jason.valdez.451@college.edu,Chemical,97.0,9.3,2003-03-25,Data Science,Web Development,Robotics
+2023452,Christine Adams,christine.adams.452@college.edu,Mechanical,94.0,9.6,2004-10-25,Power Systems,Automotive,Cyber Security
+2023453,John Garza,john.garza.453@college.edu,Mechanical,77.6,7.8,2004-07-01,Cyber Security,Power Systems,Networking
+2023454,Patricia Hill,patricia.hill.454@college.edu,Electronics,80.9,8.1,2003-03-02,AI,Robotics,Automotive
+2023455,Bethany Guerra,bethany.guerra.455@college.edu,Chemical,77.8,7.8,2004-07-15,Data Science,Structural Engineering,Networking
+2023456,Laura Goodwin,laura.goodwin.456@college.edu,IT,81.7,8.2,2005-05-03,Robotics,Automotive,Cloud Computing
+2023457,Sara Hughes MD,sara.hughes.md.457@college.edu,IT,92.1,9.6,2005-04-15,AI,Transportation,Automotive
+2023458,Grace Hayes,grace.hayes.458@college.edu,Electronics,77.0,7.7,2003-06-26,Automotive,Transportation,Web Development
+2023459,Jennifer Meadows,jennifer.meadows.459@college.edu,Electrical,75.2,7.5,2003-03-10,Cyber Security,Cloud Computing,Automotive
+2023460,John Goodwin Jr.,john.goodwin.jr..460@college.edu,Electronics,87.2,8.7,2004-06-01,Data Science,Robotics,Networking
+2023461,Kayla Gilmore,kayla.gilmore.461@college.edu,Electronics,94.4,9.5,2003-05-19,Structural Engineering,Cyber Security,Automotive
+2023462,Jamie Villa,jamie.villa.462@college.edu,IT,79.0,7.9,2004-05-26,Cyber Security,Power Systems,Web Development
+2023463,Blake Smith,blake.smith.463@college.edu,Civil,81.9,8.2,2005-08-21,Control Systems,AI,Robotics
+2023464,Kyle Roberts,kyle.roberts.464@college.edu,Electronics,85.4,8.5,2004-02-01,Networking,Structural Engineering,Transportation
+2023465,Brooke Garrett,brooke.garrett.465@college.edu,Computer Science,80.0,8.0,2004-07-17,AI,Cloud Computing,Cyber Security
+2023466,Charles Thompson,charles.thompson.466@college.edu,Computer Science,76.7,7.7,2005-01-16,Cyber Security,Transportation,Robotics
+2023467,Cynthia Bird,cynthia.bird.467@college.edu,Civil,83.5,8.3,2004-09-25,AI,Cyber Security,Web Development
+2023468,Mrs. Katherine Taylor,mrs..katherine.taylor.468@college.edu,Electronics,92.6,9.1,2005-09-22,Transportation,Control Systems,Web Development
+2023469,Michael Pruitt,michael.pruitt.469@college.edu,IT,78.5,7.8,2004-03-07,Transportation,Power Systems,Web Development
+2023470,Francis Sims,francis.sims.470@college.edu,Mechanical,96.5,9.1,2003-01-23,Structural Engineering,Automotive,Cloud Computing
+2023471,Mrs. Natasha Orozco,mrs..natasha.orozco.471@college.edu,Mechanical,76.7,7.7,2003-08-08,AI,Cyber Security,Transportation
+2023472,Jennifer Tapia,jennifer.tapia.472@college.edu,Electrical,76.4,7.6,2005-01-27,Structural Engineering,Web Development,Robotics
+2023473,Heidi Brown,heidi.brown.473@college.edu,IT,89.0,8.9,2004-05-15,Web Development,Robotics,Control Systems
+2023474,John King,john.king.474@college.edu,IT,97.4,9.1,2003-07-02,Cyber Security,Robotics,Automotive
+2023475,Thomas Miles,thomas.miles.475@college.edu,Electrical,76.0,7.6,2004-02-27,Cyber Security,Cloud Computing,AI
+2023476,Alicia Cross,alicia.cross.476@college.edu,Computer Science,76.1,7.6,2004-11-27,Networking,Web Development,Transportation
+2023477,Joshua Hughes,joshua.hughes.477@college.edu,IT,94.1,9.0,2003-01-24,Web Development,Cyber Security,Networking
+2023478,Matthew Green,matthew.green.478@college.edu,Chemical,87.6,8.8,2004-10-24,Structural Engineering,Data Science,Robotics
+2023479,Mary Brown,mary.brown.479@college.edu,Civil,86.2,8.6,2005-04-13,Data Science,Cyber Security,Automotive
+2023480,Matthew Chang,matthew.chang.480@college.edu,Electronics,81.0,8.1,2005-06-05,Power Systems,Structural Engineering,Cloud Computing
+2023481,Courtney Morris,courtney.morris.481@college.edu,Electrical,77.0,7.7,2004-03-08,Cyber Security,Robotics,Data Science
+2023482,Nicholas Martinez,nicholas.martinez.482@college.edu,Chemical,95.1,9.3,2004-04-22,AI,Cyber Security,Transportation
+2023483,Maria Sawyer,maria.sawyer.483@college.edu,Electronics,76.5,7.7,2004-04-26,Cyber Security,AI,Networking
+2023484,Gabrielle Riggs,gabrielle.riggs.484@college.edu,Computer Science,86.4,8.6,2003-11-24,Networking,Cyber Security,Cloud Computing
+2023485,Lauren Marquez,lauren.marquez.485@college.edu,Electrical,83.2,8.3,2005-07-21,Structural Engineering,Transportation,Networking
+2023486,Nichole Pham,nichole.pham.486@college.edu,Mechanical,80.7,8.1,2005-05-11,Data Science,Structural Engineering,Cloud Computing
+2023487,Heather Rose,heather.rose.487@college.edu,Chemical,89.7,9.0,2003-07-24,Data Science,AI,Control Systems
+2023488,Peter Livingston,peter.livingston.488@college.edu,Computer Science,91.4,9.3,2004-06-08,Power Systems,AI,Cyber Security
+2023489,Michelle Ortiz,michelle.ortiz.489@college.edu,Civil,79.9,8.0,2004-10-31,Power Systems,Networking,Data Science
+2023490,Andrea Garcia,andrea.garcia.490@college.edu,IT,88.6,8.9,2004-04-22,Automotive,Web Development,Power Systems
+2023491,Terri Wilson,terri.wilson.491@college.edu,Mechanical,77.7,7.8,2003-01-06,Structural Engineering,Cyber Security,Robotics
+2023492,Margaret Doyle,margaret.doyle.492@college.edu,Chemical,77.6,7.8,2004-04-22,AI,Power Systems,Automotive
+2023493,Donna Glenn,donna.glenn.493@college.edu,Mechanical,75.3,7.5,2003-04-11,Structural Engineering,Networking,Power Systems
+2023494,Michael Woodard,michael.woodard.494@college.edu,Civil,77.1,7.7,2002-11-22,Cloud Computing,Automotive,Transportation
+2023495,Lauren Schultz,lauren.schultz.495@college.edu,Mechanical,90.8,9.3,2004-01-04,Networking,Power Systems,AI
+2023496,Raymond Meyer,raymond.meyer.496@college.edu,Electrical,78.7,7.9,2004-09-23,Control Systems,Power Systems,Networking
+2023497,Teresa Walker,teresa.walker.497@college.edu,IT,97.6,9.1,2004-04-08,Web Development,Structural Engineering,Robotics
+2023498,Courtney Dunn,courtney.dunn.498@college.edu,Computer Science,88.7,8.9,2003-02-17,Transportation,Structural Engineering,Robotics
+2023499,David Reed,david.reed.499@college.edu,Computer Science,89.6,9.0,2005-09-29,Web Development,Structural Engineering,Data Science
+2023500,Robert Mejia,robert.mejia.500@college.edu,Computer Science,80.7,8.1,2005-03-13,Transportation,Networking,Data Science

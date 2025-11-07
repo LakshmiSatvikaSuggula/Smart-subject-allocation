@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt=require("bcrypt")
 const jwt=require("jsonwebtoken")
+const nodemailer=require("nodemailer")
+const studentRoutes = require("./routes/student");
 
 require("dotenv").config();
 
@@ -26,12 +28,17 @@ const adminRoutes = require("./routes/admin");
 const Student = require("./models/User");
 const Faculty = require("./models/Faculty");
 const Admin=require("./models/Admin")
+const electiveRoutes = require("./routes/electives");
+
+
 
 
 // Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/electives", electiveRoutes);
+app.use("/api/student", studentRoutes);
 
 app.post("/register", async (req, res) => {
   try {
@@ -122,6 +129,79 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.post("/forgot-password", async (req, res) => {
+  const { role, regdNo, facultyId, adminId } = req.body;
+
+  try {
+    let user = null;
+    let email = null;
+
+    // ✅ Determine user collection based on role
+    if (role === "student") {
+      user = await Student.findOne({ regdNo });
+      if (user) email = user.email;
+    } else if (role === "faculty") {
+      user = await Faculty.findOne({ regdNo: facultyId });
+      if (user) email = user.email;
+    } else if (role === "admin") {
+      user = await Admin.findOne({ regdNo: adminId });
+      if (user) email = user.email;
+    } else {
+      return res.status(400).json({ message: "Invalid role" });
+    }
+
+    // 🔐 Always respond with success to avoid user enumeration
+    if (!user) {
+      return res.json({
+        message:
+          "If an account with that ID exists, a password reset link has been sent to the associated email address.",
+      });
+    }
+
+    // Generate a reset token
+    const resetToken = jwt.sign(
+      { id: user._id, role },
+      process.env.JWT_SECRET,
+      { expiresIn: "15m" }
+    );
+
+    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+
+    // Configure Nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER, // e.g., your Gmail
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // Email content
+    const mailOptions = {
+      from: `"Smart Subject Allocation" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Password Reset Request",
+      html: `
+        <p>Hello ${user.name || "User"},</p>
+        <p>You requested to reset your password. Please click the link below to set a new one:</p>
+        <a href="${resetLink}" target="_blank">${resetLink}</a>
+        <p>This link will expire in 15 minutes.</p>
+        <p>If you didn't request this, you can ignore this email.</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    return res.json({
+      message:
+        "If an account with that ID exists, a password reset link has been sent to the associated email address.",
+    });
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    res.status(500).json({ message: "Server error. Please try again later." });
   }
 });
 

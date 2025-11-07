@@ -34,106 +34,97 @@ app.use("/api/faculty", facultyRoutes);
 app.use("/api/admin", adminRoutes);
 
 app.post("/register", async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    department,
-    regdNo,
-    percentage,
-    cgpa,
-    dob
-  } = req.body;
-
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "Name, email and password are required" });
-  }
-
   try {
-    // Check if user already exists
-    const existingUser = await Student.findOne({ regdNo:regdNo });
-    if (existingUser) {
-      return res.status(400).json({ message: "User with this email already exists" });
+    const { role, name, email, password, department, regdNo, percentage, cgpa, dob } = req.body;
+
+    // Block any non-student role
+    if (role !== "student") {
+      return res.status(403).json({ error: "Only students can register." });
+    }
+
+    // Check required fields
+    if (!name || !email || !password || !department || !regdNo || !percentage || !cgpa || !dob) {
+      return res.status(400).json({ error: "All fields are required." });
+    }
+
+    // Check existing student
+    const existingStudent = await Student.findOne({ $or: [{ email }, { regdNo }] });
+    if (existingStudent) {
+      return res.status(400).json({ error: "Student already exists with this email or regdNo." });
     }
 
     // Hash password
-    const passwordHash = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new user
-    const newUser = new Student({
+    const newStudent = new Student({
+      role,
       name,
       email,
-      passwordHash,
-      role: "student",
+      passwordHash: hashedPassword,
       department,
       regdNo,
       percentage,
       cgpa,
-      dob
+      dob,
     });
 
-    await newUser.save();
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: newUser._id, email: newUser.email, role: newUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    res.status(201).json({ message: "Registration successful", token, user: newUser });
-
+    await newStudent.save();
+    res.status(201).json({ message: "Student registered successfully!" });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
+    console.error("Error:", err);
+    res.status(500).json({ error: "Server error." });
   }
 });
 
 
-app.post("/login", async (req, res) => {
-  const { regdNo, password } = req.body;
 
-  if (!regdNo || !password) {
-    return res.status(400).json({ message: "regdNo and password required" });
+app.post("/login", async (req, res) => {
+  const { role, regdNo, password } = req.body;
+
+  if (!role || !regdNo || !password) {
+    return res.status(400).json({ message: "role, regdNo, and password are required" });
   }
 
   try {
-    // Check all collections in parallel
-    const [student, faculty, admin] = await Promise.all([
-      Student.findOne({ regdNo }),
-      Faculty.findOne({ regdNo }),
-      Admin.findOne({ regdNo })
-    ]);
+    let user = null;
 
-    // Find which user exists
-    const user = student || faculty || admin;
-    if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+    // 🔍 Check user only in the relevant collection
+    if (role === "student") {
+      user = await Student.findOne({ regdNo });
+    } else if (role === "faculty") {
+      user = await Faculty.findOne({ regdNo });
+    } else if (role === "admin") {
+      user = await Admin.findOne({ regdNo });
+    } else {
+      return res.status(400).json({ message: "Invalid role" });
     }
 
-    // Verify password (assuming hashed in DB)
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    // 🔐 Check password (assuming you store bcrypt hashes)
     const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
-      console.log(await bcrypt.hash(password,10))
       return res.status(401).json({ message: "Invalid credentials" });
     }
-  
-    // Generate JWT token
+
+    // ✅ Create JWT payload
     const payload = {
       id: user._id,
       regdNo: user.regdNo,
-      role: student ? "student" : faculty ? "faculty" : "admin"
+      role,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "10h" });
 
-    return res.json({ message: "Login successful", token, user: payload });
-
+    res.json({ message: "Login successful", token, user: payload });
   } catch (err) {
-    console.error(err);
+    console.error("Login error:", err);
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 app.get("/", (req, res) => res.send("Smart Subject Allocation Backend 🚀"));
 

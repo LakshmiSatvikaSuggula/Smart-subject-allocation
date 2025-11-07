@@ -6,6 +6,7 @@ import LandingPage from "./components/LandingPage";
 import LoginPage from "./components/Login/LoginPage";
 import RegisterPage from "./components/Login/RegisterPage";
 import ResetPasswordRequest from "./components/Login/ResetPasswordRequest";
+import Dashboard from "./components/Student/StudentDashboard";
 // import Login from "./pages/Login";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<RegisterPage/>} />
           <Route path="/reset-password" element={<ResetPasswordRequest/>} />
+          <Route path="/student" element={<Dashboard/>} />
         </Routes>
       </div>
     </Router>

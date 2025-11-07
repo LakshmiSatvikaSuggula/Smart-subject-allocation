@@ -1,0 +1,50 @@
+/* src/components/Student/StudentDashboard.css */
+
+/* Define the new gradient for the student navbar */
+.bg-info-gradient {
+    /* Updated gradient to complement the library tones */
+    background: #6D4C41; /* Darker brown/wood tone as a base */
+    background: linear-gradient(90deg, #5D4037 0%, #795548 100%); /* Earthy brown gradient */
+}
+
+.dashboard-body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    /* === ADD THESE LINES FOR BACKGROUND IMAGE === */
+    /* 🚨 IMPORTANT: Replace 'path/to/your/image.jpg' with the actual path */
+    background-image: url('student.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* 1. Style for the active button (Matches the primary blue) */
+.nav-btn-active-info {
+    background-color: #EDE7F6; /* Light purple/grey to stand out but not clash */
+    color: #4A148C !important; /* Deep purple text for contrast and elegance */
+    border-color: #EDE7F6 !important;
+    font-weight: bold;
+}
+
+/* 2. Style for HOVER and FOCUS states (The requested change) */
+.btn-outline-light:hover,
+.btn-outline-light:focus {
+    /* Use a color that fits the earthy palette, perhaps a lighter brown or a muted gold */
+    border-color: #AF8B65 !important; /* Muted gold/tan for hover effect */
+    opacity: 0.9; /* Slightly translucent effect */
+    color: #AF8B65 !important; /* Change text color on hover */
+    background-color: rgba(255, 255, 255, 0.1); /* Slight white overlay for hover */
+}
+
+/* Ensure the Dropdown Toggle (Profile) hover also looks good */
+.dropdown-toggle.btn-outline-light:hover {
+    background-color: #AF8B65 !important; /* Muted gold/tan for hover effect */
+    border-color: #AF8B65 !important;
+    color: #FFFFFF !important; /* White text on hover */
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

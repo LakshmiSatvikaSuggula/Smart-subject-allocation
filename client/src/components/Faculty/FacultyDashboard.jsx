@@ -6,14 +6,14 @@ import {
   FiUsers, 
   FiLogOut, 
   FiFileText,
-  FiUser,        // Import FiUser for the profile icon
-  FiChevronDown  // Import FiChevronDown for the dropdown arrow
+  FiDownload,
+  FiUser,
+  FiChevronDown
 } from "react-icons/fi";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './FacultyDashboard.css'; // Your custom CSS for dashboard layout
-import { Dropdown } from 'react-bootstrap'; // Import Dropdown from react-bootstrap
+import './FacultyDashboard.css';
+import { Dropdown } from 'react-bootstrap';
 
-// Import the separate page components from the SAME directory
 import StudentUploadFaculty from './StudentUploadFaculty';
 import ManageElectivesFaculty from './ManageElectivesFaculty';
 import AutoAllocation from './AutoAllocation';
@@ -22,18 +22,34 @@ import FacultyReports from './FacultyReports';
 
 export default function FacultyDashboard() {
   const [activeTab, setActiveTab] = useState("upload");
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false); // State for dropdown
-
-  // Placeholder for faculty info (you would fetch this from your backend)
-  const facultyInfo = {
-    name: "Dr. Jane Doe",
-    fac_id: "FCLT12345", // Example Registration Number
-    // Add other profile info as needed
-  };
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
   const handleLogout = () => {
     alert("Logging out...");
-    // TODO: Implement actual logout logic (e.g., clear tokens, redirect)
+    // TODO: clear tokens and redirect
+  };
+
+  const handleDownloadPreferences = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch("http://localhost:5000/api/faculty/download-student-preferences", {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+
+      if (!res.ok) throw new Error("Failed to download preferences");
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "student_preferences.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (err) {
+      console.error(err);
+      alert("Error downloading student preferences. Check console.");
+    }
   };
 
   const renderActiveComponent = () => {
@@ -55,11 +71,8 @@ export default function FacultyDashboard() {
 
   return (
     <div className="dashboard-container"> 
-      {/* Top Navigation */}
       <header className="topnav">
-        <div className="topnav-title">
-            Faculty
-        </div>
+        <div className="topnav-title">Faculty</div>
         <nav className="topnav-links">
           <TopnavButton
             label="Upload Students"
@@ -91,29 +104,27 @@ export default function FacultyDashboard() {
             active={activeTab === "reports"}
             onClick={() => setActiveTab("reports")}
           />
+          <TopnavButton
+            label="Download Preferences"
+            icon={<FiDownload />}
+            active={false}
+            onClick={handleDownloadPreferences}
+          />
         </nav>
 
-        {/* --- Profile Dropdown Section (Copied from Admin Dashboard logic) --- */}
         <Dropdown show={showProfileDropdown} onToggle={setShowProfileDropdown} align="end">
           <Dropdown.Toggle as="div" id="profile-dropdown" className="faculty-profile-dropdown-toggle">
             <FiUser className="me-2" size={20} /><FiChevronDown className="ms-2" />
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="shadow-lg mt-2">
-            <Dropdown.Header>
-              <strong className="text-primary">Fac_ID:</strong> {facultyInfo.fac_id}
-            </Dropdown.Header>
-            <Dropdown.Divider />
             <Dropdown.Item onClick={handleLogout} className="text-danger">
               <FiLogOut className="me-2" /> Logout
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        {/* --- End Profile Dropdown Section --- */}
-
       </header>
 
-      {/* Main Content */}
       <main className="main-content">
         {renderActiveComponent()}
       </main>

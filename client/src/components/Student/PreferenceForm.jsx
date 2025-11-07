@@ -1,108 +1,182 @@
-// src/components/Student/PreferenceForm.jsx
 import React, { useState, useEffect } from "react";
 import { Form, Button, Card, Alert, Spinner, Table } from "react-bootstrap";
 import axios from "axios";
 
-const NUM_CHOICES = 4; // Number of ranked choices allowed
+const NUM_CHOICES = 4;
 
 export default function PreferenceForm() {
   const [electives, setElectives] = useState([]);
-  const [selections, setSelections] = useState({}); // {1: electiveId, 2: electiveId, ...}
+  const [selections, setSelections] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const studentRegdNo = localStorage.getItem("regdNo"); // Ensure this is stored on login
+  const [completedElectiveCodes, setCompletedElectiveCodes] = useState([]);
+  const [isAlreadySubmitted, setIsAlreadySubmitted] = useState(false);
 
-  // Fetch electives from backend
+  const [showCompletedInput, setShowCompletedInput] = useState(false); // Ask completed electives
+  const [completedInput, setCompletedInput] = useState(""); // comma-separated codes
+
+  const studentRegdNo = localStorage.getItem("regdNo");
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    const fetchElectives = async () => {
+    if (!studentRegdNo) {
+      setError("Student registration number not found. Please log in again.");
+      return;
+    }
+
+    const fetchElectivesAndStatus = async () => {
+      setLoading(true);
       try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/electives", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        // Ensure we always have an array
-        setElectives(Array.isArray(res.data) ? res.data : []);
+        const headers = { Authorization: `Bearer ${token}` };
+
+        // Fetch all electives
+        const electivesRes = await axios.get("http://localhost:5000/electives", { headers });
+        const allElectives = Array.isArray(electivesRes.data) ? electivesRes.data : [];
+
+        // Fetch student's status
+        const statusRes = await axios.get(
+          `http://localhost:5000/api/student/allocation-details`,
+          { headers }
+        );
+        const studentStatus = statusRes.data;
+
+        if (studentStatus.preferencesSubmitted) {
+          setIsAlreadySubmitted(true);
+          setSuccess("✅ Your preferences have already been submitted.");
+          const existingSelections = {};
+          if (Array.isArray(studentStatus.currentPreferences)) {
+            studentStatus.currentPreferences.forEach(pref => {
+              existingSelections[pref.rank] = pref.electiveId;
+            });
+          }
+          setSelections(existingSelections);
+
+          const completedIds = Array.isArray(studentStatus.completedElectives)
+            ? studentStatus.completedElectives
+            : [];
+          setCompletedElectiveCodes(completedIds);
+          const availableElectives = allElectives.filter(e => !completedIds.includes(e.code));
+          setElectives(availableElectives);
+        } else {
+          // If no completed electives stored, ask input
+          if (!studentStatus.completedElectives || studentStatus.completedElectives.length === 0) {
+            setShowCompletedInput(true);
+          } else {
+            const completedIds = studentStatus.completedElectives;
+            setCompletedElectiveCodes(completedIds);
+            const availableElectives = allElectives.filter(e => !completedIds.includes(e.code));
+            setElectives(availableElectives);
+          }
+        }
       } catch (err) {
         console.error(err);
-        setError("Failed to load electives. Please try again later.");
+        setError("Failed to load data. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchElectives();
-  }, []);
+    fetchElectivesAndStatus();
+  }, [studentRegdNo, token]);
 
-  // Handle radio button selection
+  const handleCompletedSubmit = async () => {
+    const inputCodes = completedInput
+      .split(",")
+      .map(s => s.trim())
+      .filter(Boolean); // remove empty strings
+
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      const electivesRes = await axios.get("http://localhost:5000/electives", { headers });
+      const allElectives = Array.isArray(electivesRes.data) ? electivesRes.data : [];
+
+      const validCodes = allElectives.map(e => e.code);
+      const filteredCodes = inputCodes.filter(code => validCodes.includes(code));
+
+      // Accept empty input as valid
+      setCompletedElectiveCodes(filteredCodes);
+
+      const availableElectives = allElectives.filter(e => !filteredCodes.includes(e.code));
+      setElectives(availableElectives);
+
+      setShowCompletedInput(false); // Move to main form
+      setError("");
+    } catch (err) {
+      console.error(err);
+      setError("Failed to validate completed electives. Try again.");
+    }
+  };
+
   const handleRadioChange = (electiveId, rank) => {
     const updatedSelections = { ...selections };
-
-    // Remove this elective from any previous rank
     for (let r = 1; r <= NUM_CHOICES; r++) {
       if (updatedSelections[r] === electiveId) updatedSelections[r] = null;
     }
-
-    // Assign elective to current rank
     updatedSelections[rank] = electiveId;
-
     setSelections(updatedSelections);
     setError("");
     setSuccess("");
   };
 
-  // Handle form submission
-  // Handle form submission
-const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    if (isAlreadySubmitted) return;
+    if (!selections[1]) return setError("Choice 1 is mandatory.");
 
-    if (!selections[1]) {
-      return setError("Choice 1 is mandatory. Please select your first preference.");
+    const selectedElectiveIds = Object.values(selections).filter(Boolean);
+    if (new Set(selectedElectiveIds).size !== selectedElectiveIds.length) {
+      return setError("Cannot select same elective for multiple ranks.");
     }
 
-    // *** FIX APPLIED HERE ***
-    // The server expects: { rank: number, electiveId: string } objects in the array.
     const rankedPreferences = Object.keys(selections)
-      .filter((rank) => selections[rank]) // Filter out unselected ranks
-      .sort((a, b) => a - b) // Ensure submission order follows rank (1, 2, 3...)
-      .map((rank) => ({ // Map to the required { rank: N, electiveId: ID } structure
-        rank: parseInt(rank, 10), // Convert rank key (string) to number
-        electiveId: selections[rank], // Get the selected elective ID
-      }));
-    // *** END FIX ***
+      .filter(r => selections[r])
+      .sort((a, b) => a - b)
+      .map(rank => ({ rank: parseInt(rank, 10), electiveId: selections[rank] }));
 
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      const headers = { Authorization: `Bearer ${token}` };
       await axios.post(
         `http://localhost:5000/api/student/submit-preferences`,
-        { preferences: rankedPreferences }, // Sending the correctly structured array
-        { headers: { Authorization: `Bearer ${token}` } }
+        { preferences: rankedPreferences, completedElectives: completedElectiveCodes },
+        { headers }
       );
-
       setSuccess("Preferences submitted successfully!");
+      setIsAlreadySubmitted(true);
     } catch (err) {
       console.error(err);
-      // IMPORTANT: Log the detailed response data for better error messages
-      if (err.response && err.response.data) {
-          setError(err.response.data.message || "Failed to submit preferences due to server validation error.");
-      } else {
-          setError("Failed to submit preferences. Please try again.");
-      }
+      setError("Failed to submit preferences.");
     } finally {
       setLoading(false);
     }
-};
+  };
+
+  if (loading) return <Spinner animation="border" className="m-4" />;
+
+  if (showCompletedInput) {
+    return (
+      <Card className="m-4 p-4 shadow-lg">
+        <h3>Enter any electives you have already completed</h3>
+        <p>Separate multiple electives by commas (optional). e.g., 22CS101, 22CS102</p>
+        <Form.Group className="mb-3">
+          <Form.Control
+            type="text"
+            value={completedInput}
+            onChange={e => setCompletedInput(e.target.value)}
+            placeholder="Enter completed electives codes"
+          />
+        </Form.Group>
+        <Button onClick={handleCompletedSubmit}>Submit Completed Electives</Button>
+        {error && <Alert className="mt-3" variant="danger">{error}</Alert>}
+      </Card>
+    );
+  }
 
   return (
-    <Card className="m-4 p-4 shadow-lg" style={{ borderRadius: "10px" }}>
-      <h2 className="mb-4" style={{ color: "#4A148C" }}>
-        📚 Elective Preference Submission
-      </h2>
-      <Alert variant="info">
-        Select your preference rank (Choice 1 is highest priority) for up to {NUM_CHOICES} subjects.
-        Each subject can only be assigned to one rank.
-      </Alert>
-
+    <Card className="m-4 p-4 shadow-lg">
+      <h2>Elective Preference Submission</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       {success && <Alert variant="success">{success}</Alert>}
 
@@ -112,39 +186,44 @@ const handleSubmit = async (e) => {
             <tr>
               <th>Subject Name</th>
               {Array.from({ length: NUM_CHOICES }, (_, i) => (
-                <th key={i + 1} className="text-center">
-                  Choice {i + 1}
-                </th>
+                <th key={i + 1}>Choice {i + 1}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(electives) &&
-              electives.map((elective) => (
-                <tr key={elective._id}>
-                  <td>{elective.name}</td>
+            {electives.length > 0 ? (
+              electives.map(e => (
+                <tr key={e._id}>
+                  <td>{e.name} ({e.code})</td>
                   {Array.from({ length: NUM_CHOICES }, (_, i) => {
                     const rank = i + 1;
                     return (
                       <td key={rank} className="text-center">
                         <Form.Check
                           type="radio"
-                          name={`rank-${rank}`} // one group per rank
-                          value={elective._id}
-                          checked={selections[rank] === elective._id}
-                          onChange={() => handleRadioChange(elective._id, rank)}
+                          name={`rank-${rank}`}
+                          value={e._id}
+                          checked={selections[rank] === e._id}
+                          onChange={() => handleRadioChange(e._id, rank)}
+                          disabled={isAlreadySubmitted}
                         />
                       </td>
                     );
                   })}
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan={NUM_CHOICES + 1} className="text-center text-muted">
+                  No available electives to display.
+                </td>
+              </tr>
+            )}
           </tbody>
         </Table>
-
-        <Button type="submit" disabled={loading} className="mt-3" style={{ backgroundColor: "#4A148C", borderColor: "#4A148C" }}>
-          {loading ? <Spinner animation="border" size="sm" /> : "Submit Preferences"}
-        </Button>
+        {!isAlreadySubmitted && (
+          <Button type="submit">Submit Preferences</Button>
+        )}
       </Form>
     </Card>
   );

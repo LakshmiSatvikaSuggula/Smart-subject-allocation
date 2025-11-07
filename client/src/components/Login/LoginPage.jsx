@@ -97,6 +97,7 @@ export default function LoginPage() {
 
       if (response.ok && data.token) {
         localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("regdNo", data.user.regdNo);
         localStorage.setItem("token", data.token);
         setError("");
         if (data.user.role === "admin") {

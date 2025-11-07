@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import './FacultyDashboard.css';
 import { Alert } from "react-bootstrap";
 
@@ -21,7 +21,7 @@ export default function StudentUploadFaculty() {
     formData.append("file", file);
 
     try {
-      const token = localStorage.getItem("token"); // optional
+      const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:5000/api/faculty/upload-csv", {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -32,8 +32,20 @@ export default function StudentUploadFaculty() {
 
       if (response.ok && data.ok) {
         const previewData = data.preview || [];
-        setPreview(previewData);
-        setMessage(`CSV uploaded successfully! Showing preview of first ${previewData.length} rows.`);
+
+        // Map preferences to an array of codes
+        const mappedPreview = previewData.map(row => ({
+          ...row,
+          preferences: [
+            row.preference1,
+            row.preference2,
+            row.preference3,
+            row.preference4
+          ].filter(Boolean) // remove empty
+        }));
+
+        setPreview(mappedPreview);
+        setMessage(`CSV uploaded successfully! Showing preview of first ${mappedPreview.length} rows.`);
       } else {
         setError(data.error || "Failed to upload CSV.");
       }
@@ -85,7 +97,7 @@ export default function StudentUploadFaculty() {
             <tbody>
               {preview.map((row, idx) => (
                 <tr key={idx}>
-                  <td>{row.regdNo}</td>
+                  <td>{row.regdno}</td>
                   <td>{row.name}</td>
                   <td>{row.email}</td>
                   <td>{row.department}</td>
@@ -102,7 +114,9 @@ export default function StudentUploadFaculty() {
 
       <p className="mt-3 text-info">
         CSV columns required: <br/>
-        <strong>regdNo, name, email, department, percentage, cgpa, dob, Preference1, Preference2, Preference3</strong>
+        <strong>
+          regdNo, name, email, department, percentage, cgpa, dob, Preference1, Preference2, Preference3, Preference4
+        </strong>
       </p>
     </div>
   );

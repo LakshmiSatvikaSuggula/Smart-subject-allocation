@@ -10,7 +10,11 @@ const upload = multer({ dest: 'tmp/' });
 const User = require('../models/User'); // Used for Students
 const runAllocation = require('../services/allocate'); // Not used in the new route, but kept
 const Allotment = require('../models/Allotment');
+const Elective=require('../models/Elective')
 const ExcelJS = require('exceljs');
+const { Parser } = require('json2csv');
+const PDFDocument = require("pdfkit");
+
 
 // list
 router.get('/subjects', auth, requireRole('faculty'), async (req,res) => {
@@ -54,174 +58,309 @@ router.delete('/subjects/:code', auth, requireRole('faculty'), async (req,res) =
 });
 
 
-router.post('/upload-csv', auth, requireRole('faculty'), upload.single('file'), async (req, res) => {
-    if (!req.file) return res.status(400).send('No file uploaded');
+router.post(
+  "/upload-csv",
+  auth,
+  requireRole("faculty"),
+  upload.single("file"),
+  async (req, res) => {
+    if (!req.file) return res.status(400).json({ ok: false, error: "No file uploaded" });
 
     const rows = [];
-    fs.createReadStream(req.file.path)
-        .pipe(csv())
-        .on('data', (data) => rows.push(data))
-        .on('end', async () => {
-            const preview = rows.slice(0, 5); // first 5 rows for preview
-            try {
-                // Fetch all elective subjects to map codes to ObjectIds for later use
-                const subjectCodes = await Subject.find().select('code _id').lean();
-                const codeToIdMap = new Map(subjectCodes.map(s => [s.code, s._id]));
+    const filePath = req.file.path;
 
-                for (const r of rows) {
-                    const roll = r.RollNo || r.regdNo || r.Roll;
-                    const name = r.Name || r.name;
-                    const email = r.Email || r.email;
-                    const department = r.Department || r.department || '';
-                    const percentage = parseFloat(r.Percentage || r.perc || 0);
-                    const cgpa = parseFloat(r.CGPA || r.cgpa || 0);
-                    const dob = r.DOB ? new Date(r.DOB) : null;
+    try {
+      // Read CSV
+      fs.createReadStream(filePath)
+        .pipe(csv({ mapHeaders: ({ header }) => header.trim().toLowerCase() }))
+        .on("data", (data) => {
+          rows.push(data);
+        })
+        .on("end", async () => {
+          // Clean up uploaded file
+          fs.unlinkSync(filePath);
 
-                    // Convert preference codes (from CSV) to an array of codes
-                    const preferenceCodes = [];
-                    if (r.Preference1) preferenceCodes.push(r.Preference1);
-                    if (r.Preference2) preferenceCodes.push(r.Preference2);
-                    if (r.Preference3) preferenceCodes.push(r.Preference3);
+          // Fetch all valid electives codes
+          const electives = await Elective.find({}, "code").lean();
+          const validElectiveCodes = electives.map((e) => e.code);
 
-                    // Map the codes to a structured preference array (as expected by a robust algorithm)
-                    const preferences = preferenceCodes
-                        .map((code, index) => {
-                            const electiveId = codeToIdMap.get(code);
-                            // Only store valid preferences that match an existing subject
-                            return electiveId ? { rank: index + 1, electiveId: electiveId } : null;
-                        })
-                        .filter(p => p !== null);
+          // Prepare preview and validate preferences
+          const preview = rows.map((row, idx) => {
+            const preferences = [
+              row.preference1,
+              row.preference2,
+              row.preference3,
+              row.preference4,
+            ].filter(Boolean); // remove empty
 
+            // Check for invalid electives
+            const invalidPrefs = preferences.filter((code) => !validElectiveCodes.includes(code));
 
-                    await User.findOneAndUpdate(
-                        { regdNo: roll },
-                        {
-                            name,
-                            email,
-                            role: 'student',
-                            department,
-                            regdNo: roll,
-                            percentage,
-                            cgpa,
-                            dob,
-                            preferences, // Save the structured array of preferences
-                        },
-                        { upsert: true, new: true, setDefaultsOnInsert: true }
-                    );
-                }
+            return {
+              ...row,
+              preferences,
+              invalidPreferences: invalidPrefs,
+              rowNumber: idx + 1,
+            };
+          });
 
-                fs.unlinkSync(req.file.path);
-                res.json({ ok: true, previewCount: preview.length });
-            } catch (err) {
-                console.error(err);
-                fs.unlinkSync(req.file.path);
-                res.status(500).json({ ok: false, error: err.message });
-            }
+          // Collect all invalid rows for response
+          const invalidRows = preview.filter((p) => p.invalidPreferences.length > 0);
+
+          if (invalidRows.length > 0) {
+            return res.status(400).json({
+              ok: false,
+              error: "Some rows have invalid elective codes.",
+              invalidRows,
+            });
+          }
+
+          res.json({ ok: true, preview });
         });
-});
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ ok: false, error: "Server error while processing CSV" });
+    }
+  }
+);
+
 
 
 // POST /api/faculty/auto-allocate
-router.post("/auto-allocate", auth, requireRole('faculty'), async (req, res) => {
-    try {
-        // Fetch all students and electives (using .lean() for performance)
-        let students = await User.find({ role: 'student' }).lean();
-        const electives = await Subject.find({}).lean();
+router.post("/auto-allocate", auth, requireRole("faculty"), async (req, res) => {
+  try {
+    const students = await User.find({ role: "student" })
+      .populate("preferences.electiveId")
+      .sort({ cgpa: -1 }) // high CGPA first
+      .lean();
 
-        // 1. **CRITICAL FIX: Sort students by merit (CGPA/Percentage)**
-        students.sort((a, b) => {
-            // Prioritize CGPA, fall back to Percentage if CGPA is zero/null
-            const meritA = a.cgpa || a.percentage || 0;
-            const meritB = b.cgpa || b.percentage || 0;
-            return meritB - meritA; // Descending sort (highest merit first)
-        });
+    const electives = await Elective.find().lean();
 
-        // 2. Setup capacity tracking and subject lookup map
-        const capacityMap = new Map(electives.map(e => [e._id.toString(), {
-            capacity: e.capacity,
-            allocatedCount: 0,
-            code: e.code,
-            eligibility: e.eligibility || 0
-        }]));
-        
-        const subjectCodeToIdMap = new Map(electives.map(e => [e.code, e._id]));
-        const subjectIdToCodeMap = new Map(electives.map(e => [e._id.toString(), e.code]));
+    // Map elective capacities
+    const electiveMap = {};
+    electives.forEach(e => {
+      electiveMap[e._id.toString()] = {
+        ...e,
+        allocatedCount: 0
+      };
+    });
 
-        const studentBulkUpdates = [];
-        let allocatedCount = 0;
+    // Allocate each student
+    for (const student of students) {
+      let allocated = false;
 
-        // 3. Iterate through students by merit and perform allocation
-        for (const student of students) {
-            let allocatedElectiveId = null;
+      // Sort preferences by rank
+      const sortedPrefs = (student.preferences || []).sort((a, b) => a.rank - b.rank);
 
-            // Iterate through the structured preferences array: [{ rank: 1, electiveId: "ID" }]
-            for (const pref of student.preferences) {
-                const electiveIdStr = pref.electiveId.toString();
-                const electiveStatus = capacityMap.get(electiveIdStr);
+      for (let i = 0; i < sortedPrefs.length; i++) {
+        const pref = sortedPrefs[i];
+        const elective = electiveMap[pref.electiveId._id.toString()];
 
-                if (!electiveStatus) continue; // Subject not found
+        if (!elective) continue;
 
-                const studentMerit = student.cgpa || student.percentage || 0;
-
-                // Check eligibility AND capacity
-                if (studentMerit >= electiveStatus.eligibility && electiveStatus.allocatedCount < electiveStatus.capacity) {
-                    // Allocation successful
-                    allocatedElectiveId = pref.electiveId; // This is the ObjectId
-                    electiveStatus.allocatedCount += 1;
-                    allocatedCount++;
-                    break; // Move to the next student
-                }
-            }
-            
-            // Prepare update operation for the student
-            studentBulkUpdates.push({
-                updateOne: {
-                    filter: { _id: student._id },
-                    update: { $set: { 
-                        allocatedElective: allocatedElectiveId, 
-                        isConfirmed: false 
-                    }}
-                }
-            });
+        // Only check capacity and minPercent for all except last preference
+        if (i < sortedPrefs.length - 1) {
+          if (elective.allocatedCount >= elective.capacity) continue;
+          if (student.percentage < elective.minPercent) continue;
         }
-        
-        // 4. Execute Bulk Write for Students
-        await User.bulkWrite(studentBulkUpdates);
 
-        // 5. Execute Bulk Write for Subjects (updating currentEnrollment)
-        const subjectBulkUpdates = [];
-        capacityMap.forEach((status, id) => {
-            subjectBulkUpdates.push({
-                updateOne: {
-                    filter: { _id: id },
-                    update: { $set: { currentEnrollment: status.allocatedCount } }
-                }
-            });
+        // Allocate
+        await User.findByIdAndUpdate(student._id, {
+          allocatedElective: elective._id,
+          isConfirmed: false
         });
-        await Subject.bulkWrite(subjectBulkUpdates);
 
+        // Increment allocated count
+        electiveMap[elective._id.toString()].allocatedCount++;
 
-        res.json({ ok: true, message: `Automatic allocation completed! ${allocatedCount} students were allocated.` });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ ok: false, error: "Automatic allocation failed." });
+        allocated = true;
+        break;
+      }
+
+      // If no preference satisfied, assign last preference regardless
+      if (!allocated && sortedPrefs.length > 0) {
+        const lastPref = sortedPrefs[sortedPrefs.length - 1];
+        const elective = electiveMap[lastPref.electiveId._id.toString()];
+
+        await Student.findByIdAndUpdate(student._id, {
+          allocatedElective: elective._id,
+          isConfirmed: false
+        });
+
+        electiveMap[elective._id.toString()].allocatedCount++;
+      }
     }
+
+    res.json({ ok: true, message: "Students allocated automatically!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: "Failed to auto-allocate students." });
+  }
 });
 
 
-router.get('/download-results', auth, requireRole('faculty'), async (req,res) => {
-    const rows = await Allotment.find().populate('student','name regdNo percentage').lean();
+router.get("/download-results", auth, requireRole("faculty"), async (req, res) => {
+  try {
+    const students = await User.find({ role: "student" })
+      .populate("preferences.electiveId", "code name")
+      .populate("allocatedElective", "code name")
+      .lean();
+
+    // Create a new workbook and worksheet
     const workbook = new ExcelJS.Workbook();
-    const sheet = workbook.addWorksheet('Allotments');
-    sheet.addRow(['Roll','Name','Percentage','Subject','PreferenceRank','Status']);
-    for (const r of rows) {
-        sheet.addRow([r.student.regdNo, r.student.name, r.student.percentage, r.subjectCode || '', r.preferenceRank || '', r.status]);
-    }
-    res.setHeader('Content-Type','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.setHeader('Content-Disposition','attachment; filename=allotments.xlsx');
+    const worksheet = workbook.addWorksheet("Allocations");
+
+    // Add header row
+    worksheet.addRow([
+      "Regd No",
+      "Name",
+      "Email",
+      "Department",
+      "Percentage",
+      "CGPA",
+      "DOB",
+      "Allocated Elective",
+      "Preference 1",
+      "Preference 2",
+      "Preference 3",
+      "Preference 4",
+    ]);
+
+    // Add student data
+    students.forEach((s) => {
+      worksheet.addRow([
+        s.regdNo,
+        s.name,
+        s.email,
+        s.department,
+        s.percentage,
+        s.cgpa,
+        s.dob ? s.dob.toISOString().split("T")[0] : "",
+        s.allocatedElective ? `${s.allocatedElective.name} (${s.allocatedElective.code})` : "",
+        s.preferences[0]?.electiveId?.code || "",
+        s.preferences[1]?.electiveId?.code || "",
+        s.preferences[2]?.electiveId?.code || "",
+        s.preferences[3]?.electiveId?.code || "",
+      ]);
+    });
+
+    // Set column widths (optional, for better formatting)
+    worksheet.columns.forEach((col) => {
+      col.width = 20;
+    });
+
+    // Send workbook as response
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      "attachment; filename=student_allocations.xlsx"
+    );
+
     await workbook.xlsx.write(res);
     res.end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to generate Excel file.");
+  }
 });
+
+router.get("/download-report/pdf", auth, requireRole("faculty"), async (req, res) => {
+  try {
+    const students = await User.find({ role: "student" })
+      .populate("preferences.electiveId", "code name")
+      .populate("allocatedElective", "code name")
+      .lean();
+
+    // Set headers
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=student_allocations.pdf");
+
+    const doc = new PDFDocument({ margin: 30, size: "A4" });
+    doc.pipe(res);
+
+    doc.fontSize(20).text("Student Allocation Report", { align: "center" });
+    doc.moveDown();
+
+    // Table headers
+    doc.fontSize(12).text(
+      [
+        "Regd No",
+        "Name",
+        "Department",
+        "Allocated Elective",
+        "Preference1",
+        "Preference2",
+        "Preference3",
+        "Preference4",
+      ].join(" | "),
+      { underline: true }
+    );
+    doc.moveDown(0.5);
+
+    // Add student data
+    students.forEach((s) => {
+      const row = [
+        s.regdNo,
+        s.name,
+        s.department,
+        s.allocatedElective ? `${s.allocatedElective.name} (${s.allocatedElective.code})` : "",
+        s.preferences[0]?.electiveId?.code || "",
+        s.preferences[1]?.electiveId?.code || "",
+        s.preferences[2]?.electiveId?.code || "",
+        s.preferences[3]?.electiveId?.code || "",
+      ].join(" | ");
+
+      doc.text(row);
+    });
+
+    doc.end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to generate PDF report.");
+  }
+});
+
+
+
+router.get('/download-student-preferences', auth, requireRole('faculty'), async (req, res) => {
+  try {
+    // Fetch students and populate each preference's electiveId to get code
+    const students = await User.find({ role: 'student' })
+      .populate({
+        path: 'preferences.electiveId',
+        select: 'code name'
+      })
+      .lean();
+
+    const data = students.map(s => ({
+      regdNo: s.regdNo,
+      name: s.name,
+      email: s.email,
+      department: s.department,
+      percentage: s.percentage,
+      cgpa: s.cgpa,
+      dob: s.dob ? s.dob.toISOString().split('T')[0] : '',
+      Preference1: s.preferences[0]?.electiveId?.code || '',
+      Preference2: s.preferences[1]?.electiveId?.code || '',
+      Preference3: s.preferences[2]?.electiveId?.code || '',
+      Preference4: s.preferences[3]?.electiveId?.code || ''
+    }));
+
+    const csv = new Parser().parse(data);
+
+    res.header('Content-Type', 'text/csv');
+    res.attachment('student_preferences.csv');
+    res.send(csv);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to generate CSV");
+  }
+});
+
 
 
 module.exports = router;

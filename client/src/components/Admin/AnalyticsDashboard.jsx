@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ResponsiveContainer,
   PieChart,
   Pie,
   Cell,
-  Legend
+  Tooltip,
+  Legend,
+  ResponsiveContainer
 } from "recharts";
 
 export default function AnalyticsDashboard() {
@@ -30,10 +25,16 @@ export default function AnalyticsDashboard() {
 
   if (!data) return <div className="text-center mt-4">Loading analytics...</div>;
 
-  // Pie chart data
-  const pieData = [
-    { name: "Allocated", value: data.totalAllocated },
-    { name: "Unallocated", value: data.totalUnallocated },
+  // Pie chart data for electives
+  const pieElectiveData = [
+    { name: "Allocated", value: data.totalAllocatedElective },
+    { name: "Unallocated", value: data.totalUnallocatedElective },
+  ];
+
+  // Pie chart data for life skills
+  const pieLifeSkillData = [
+    { name: "Allocated", value: data.totalAllocatedLifeSkill },
+    { name: "Unallocated", value: data.totalUnallocatedLifeSkill },
   ];
 
   const COLORS = ["#4CAF50", "#F44336"];
@@ -45,48 +46,56 @@ export default function AnalyticsDashboard() {
       {/* Summary Cards */}
       <div className="row mb-4">
         <SummaryCard title="Total Students" value={data.totalStudents} color="#2196F3" />
-        <SummaryCard title="Total Subjects" value={data.totalSubjects} color="#9C27B0" />
-        <SummaryCard title="Allocated" value={data.totalAllocated} color="#4CAF50" />
-        <SummaryCard title="Unallocated" value={data.totalUnallocated} color="#F44336" />
+        <SummaryCard title="Allocated Electives" value={data.totalAllocatedElective} color="#4CAF50" />
+        <SummaryCard title="Unallocated Electives" value={data.totalUnallocatedElective} color="#F44336" />
+        <SummaryCard title="Allocated Life Skills" value={data.totalAllocatedLifeSkill} color="#4CAF50" />
+        <SummaryCard title="Unallocated Life Skills" value={data.totalUnallocatedLifeSkill} color="#F44336" />
       </div>
 
-      {/* Charts Section */}
+      {/* Pie Charts */}
       <div className="row">
-        {/* Bar Chart: Subject-wise Allocation */}
-        <div className="col-lg-8 col-md-12 mb-4">
+        {/* Pie Chart: Elective Allocation */}
+        <div className="col-lg-6 col-md-12 mb-4">
           <div className="card shadow-lg rounded-4 p-4 bg-light card-glassmorphism">
-            <h5 className="text-secondary mb-3">📘 Subject-wise Allocation</h5>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={data.subjectData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="subject" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="allocated" fill="#4CAF50" name="Allocated" />
-                <Bar dataKey="capacity" fill="#2196F3" name="Capacity" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* Pie Chart: Allocation Ratio */}
-        <div className="col-lg-4 col-md-12">
-          <div className="card shadow-lg rounded-4 p-4 bg-light card-glassmorphism">
-            <h5 className="text-secondary mb-3">🎯 Allocation Ratio</h5>
+            <h5 className="text-secondary mb-3">🎯 Elective Allocation</h5>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={pieData}
+                  data={pieElectiveData}
                   dataKey="value"
                   nameKey="name"
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
-                  fill="#8884d8"
                   label
                 >
-                  {pieData.map((entry, index) => (
+                  {pieElectiveData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Pie Chart: Life Skill Allocation */}
+        <div className="col-lg-6 col-md-12 mb-4">
+          <div className="card shadow-lg rounded-4 p-4 bg-light card-glassmorphism">
+            <h5 className="text-secondary mb-3">🌱 Life Skill Allocation</h5>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={pieLifeSkillData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  label
+                >
+                  {pieLifeSkillData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>

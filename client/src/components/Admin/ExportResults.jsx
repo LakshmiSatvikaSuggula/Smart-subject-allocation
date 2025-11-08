@@ -28,13 +28,14 @@ export default function ExportResults() {
       });
 
       // Create a download link
-      const blob = new Blob([response.data]);
+      const blob = new Blob([response.data], { type: response.data.type });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-
-      // Set the filename based on type
       link.download = `allotments.${type.toLowerCase()}`;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(link.href); // Clean up
     } catch (err) {
       console.error(err);
       alert('Error exporting file. Make sure backend is running and token is valid.');
@@ -44,20 +45,31 @@ export default function ExportResults() {
   return (
     <div className="card shadow-lg rounded-4 p-4 mb-4 bg-light card-glassmorphism">
       <h3 className="mb-3 text-primary">Export Results</h3>
-      <p className="text-secondary mb-4">Select the format to download or export the academic results.</p>
+      <p className="text-secondary mb-4">
+        Select the format to download or export the academic results.
+      </p>
       <div className="d-flex gap-3 flex-wrap">
-        <button className="btn btn-success btn-lg rounded-pill" onClick={() => handleExport("PDF")}>
+        <button
+          className="btn btn-success btn-lg rounded-pill"
+          onClick={() => handleExport("PDF")}
+        >
           Download PDF
         </button>
-        <button className="btn btn-warning btn-lg rounded-pill" onClick={() => handleExport("Excel")}>
+        <button
+          className="btn btn-warning btn-lg rounded-pill"
+          onClick={() => handleExport("Excel")}
+        >
           Export Excel
         </button>
-        <button className="btn btn-info btn-lg rounded-pill" onClick={() => handleExport("CSV")}>
+        <button
+          className="btn btn-info btn-lg rounded-pill"
+          onClick={() => handleExport("CSV")}
+        >
           Export CSV
         </button>
       </div>
       <small className="text-muted mt-3 d-block">
-        
+        Downloads will include student allotments for electives and life skills.
       </small>
     </div>
   );

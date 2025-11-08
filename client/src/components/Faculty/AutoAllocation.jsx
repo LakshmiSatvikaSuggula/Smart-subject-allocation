@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 
 export default function AutoAllocation() {
-  const [loading, setLoading] = useState(false);
+  const [loadingElectives, setLoadingElectives] = useState(false);
+  const [loadingLifeSkills, setLoadingLifeSkills] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleAllocate = async () => {
-    setLoading(true);
+  const handleAllocate = async (type) => {
     setMessage("");
+    if (type === "electives") setLoadingElectives(true);
+    else setLoadingLifeSkills(true);
 
     try {
-      const token = localStorage.getItem("token"); // optional if using JWT
-      const response = await fetch("http://localhost:5000/api/faculty/auto-allocate", {
+      const token = localStorage.getItem("token");
+      const endpoint =
+        type === "electives"
+          ? "http://localhost:5000/api/faculty/auto-allocate"
+          : "http://localhost:5000/api/faculty/auto-allocate-lifeskills";
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
@@ -18,7 +25,11 @@ export default function AutoAllocation() {
       const data = await response.json();
 
       if (response.ok && data.ok) {
-        setMessage("Students allocated automatically!");
+        setMessage(
+          type === "electives"
+            ? "Students allocated automatically to Electives!"
+            : "Students allocated automatically to Life Skills!"
+        );
       } else {
         setMessage(data.error || "Automatic allocation failed.");
       }
@@ -26,7 +37,8 @@ export default function AutoAllocation() {
       console.error("Allocation error:", err);
       setMessage("Server error. Please try again.");
     } finally {
-      setLoading(false);
+      setLoadingElectives(false);
+      setLoadingLifeSkills(false);
     }
   };
 
@@ -34,13 +46,30 @@ export default function AutoAllocation() {
     <div>
       <h1 className="page-title">Automatic Allocation</h1>
       <div className="card">
-        <p>Click below to automatically allocate students to electives based on preferences and eligibility criteria.</p>
-        <button className="primary-btn" onClick={handleAllocate} disabled={loading}>
-          {loading ? "Allocating..." : "Run Allocation"}
-        </button>
+        <p>Automatically allocate students based on their preferences and eligibility.</p>
+
+        <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+          <button
+            className="primary-btn"
+            onClick={() => handleAllocate("electives")}
+            disabled={loadingElectives}
+          >
+            {loadingElectives ? "Allocating Electives..." : "Run Electives Allocation"}
+          </button>
+
+          <button
+            className="primary-btn"
+            onClick={() => handleAllocate("life-skills")}
+            disabled={loadingLifeSkills}
+          >
+            {loadingLifeSkills ? "Allocating Life Skills..." : "Run Life Skills Allocation"}
+          </button>
+        </div>
+
         {message && <p className="mt-2 text-info">{message}</p>}
+
         <p className="mt-3 text-info">
-          Ensure all student data and elective capacities are up-to-date before running automatic allocation.
+          Ensure all student data and capacities are up-to-date before running automatic allocation.
         </p>
       </div>
     </div>

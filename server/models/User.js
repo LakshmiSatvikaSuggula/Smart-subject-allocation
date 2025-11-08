@@ -1,51 +1,76 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    // --- Authentication & Core Student Fields ---
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true, index: true },
-    passwordHash: { type: String, required: true },
-    role: { type: String, enum: ['student', 'admin'], default: 'student', required: true }, // Added 'admin' for completeness
-    department: { type: String },
-    regdNo: { type: String, index: true },
-    
-    // --- Academic Performance Fields ---
-    percentage: { type: Number },
-    cgpa: { type: Number },
-    dob: { type: Date },
+  // --- Authentication & Core Student Fields ---
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true, index: true },
+  passwordHash: { type: String, required: true },
+  role: { type: String, enum: ['student', 'admin', 'faculty'], default: 'student', required: true },
+  department: { type: String },
+  regdNo: { type: String, index: true },
 
-    // --- Preference Submission Fields (Used by /submit-preferences) ---
-    preferences: [{
-        rank: {
-            type: Number, // Expecting the rank to be a number (1, 2, 3...)
-            required: true
-        },
-        electiveId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Elective', // Reference the Elective model
-            required: true 
-        }
-    }],
-    
-    // --- Allocation Fields (Used by /allocation-details and /confirm-allocation) ---
-    allocatedElective: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Elective', 
-        default: null 
-    },
-    isConfirmed: { 
-        type: Boolean, 
-        default: false 
-    }, // Confirmation of the allocatedElective
+  // --- Academic Performance Fields ---
+  percentage: { type: Number },
+  cgpa: { type: Number },
+  dob: { type: Date },
 
-    // --- Completed Elective Fields (New requirement for filtering) ---
-    completedElectives: [{
+  // =============================
+  // ELECTIVE PREFERENCES SECTION
+  // =============================
+  preferences: [
+    {
+      rank: { type: Number, required: true },
+      electiveId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Elective'
-    }],
+        ref: 'Elective',
+        required: true,
+      },
+    },
+  ],
 
-    // --- Timestamps ---
-    createdAt: { type: Date, default: Date.now },
+  allocatedElective: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Elective',
+    default: null,
+  },
+
+  isConfirmed: { type: Boolean, default: false },
+
+  completedElectives: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Elective',
+    },
+  ],
+
+  lifeSkillPreferences: [
+    {
+      rank: { type: Number, required: true },
+      lifeSkillId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'LifeSkill',
+        required: true,
+      },
+    },
+  ],
+
+  allocatedLifeSkill: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'LifeSkill',
+    default: null,
+  },
+
+  isLifeSkillConfirmed: { type: Boolean, default: false },
+
+  completedLifeSkills: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'LifeSkill',
+    },
+  ],
+
+
+  createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,0 +1,141 @@
+import { useState } from "react";
+import './FacultyDashboard.css';
+import { Alert } from "react-bootstrap";
+
+export default function StudentUploadLifeSkills() {
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handleUpload = async () => {
+    if (!file) return setError("Please select a CSV file.");
+
+    setLoading(true);
+    setMessage("");
+    setError("");
+    setPreview([]);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:5000/api/faculty/upload-lifeskills-csv", {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.ok) {
+        const previewData = data.preview || [];
+
+        // Map preferences to array of codes
+        const mappedPreview = previewData.map(row => ({
+          ...row,
+          preferences: [
+            row.preference1,
+            row.preference2,
+            row.preference3,
+            row.preference4
+          ].filter(Boolean),
+          invalidPreferences: row.invalidPreferences || []
+        }));
+
+        setPreview(mappedPreview);
+
+        const invalidCount = mappedPreview.filter(r => r.invalidPreferences.length > 0).length;
+        if (invalidCount > 0) {
+          setError(`${invalidCount} row(s) have invalid Life Skill codes.`);
+        } else {
+          setMessage(`CSV uploaded successfully! Showing preview of first ${mappedPreview.length} rows.`);
+        }
+
+      } else {
+        setError(data.error || "Failed to upload CSV.");
+      }
+    } catch (err) {
+      console.error("Upload error:", err);
+      setError("Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h1 className="page-title">Upload Life Skills Preferences</h1>
+
+      {message && <Alert variant="success">{message}</Alert>}
+      {error && <Alert variant="danger">{error}</Alert>}
+
+      <div className="card">
+        <input
+          type="file"
+          accept=".csv"
+          onChange={(e) => setFile(e.target.files[0])}
+          className="file-input"
+        />
+        <button className="primary-btn" onClick={handleUpload} disabled={loading}>
+          {loading ? "Uploading..." : "Upload"}
+        </button>
+      </div>
+
+      {file && <p className="mt-2 text-muted">Selected file: {file.name}</p>}
+
+      {preview.length > 0 && (
+        <div className="preview-table mt-3">
+          <h5>Preview of Uploaded Life Skills Preferences</h5>
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Preference 1</th>
+                <th>Preference 2</th>
+                <th>Preference 3</th>
+                <th>Preference 4</th>
+              </tr>
+            </thead>
+           <tbody>
+  {preview.map((row, idx) => (
+    <tr key={idx}>
+      <td>{row.regdno}</td>
+      <td>{row.name}</td>
+      <td>{row.email}</td>
+      <td>{row.department}</td>
+
+      <td style={{ color: row.invalidPreferences.includes(row.preferences[0]) ? 'red' : 'black' }}>
+        {row.preferences[0] || ""}
+      </td>
+      <td style={{ color: row.invalidPreferences.includes(row.preferences[1]) ? 'red' : 'black' }}>
+        {row.preferences[1] || ""}
+      </td>
+      <td style={{ color: row.invalidPreferences.includes(row.preferences[2]) ? 'red' : 'black' }}>
+        {row.preferences[2] || ""}
+      </td>
+      <td style={{ color: row.invalidPreferences.includes(row.preferences[3]) ? 'red' : 'black' }}>
+        {row.preferences[3] || ""}
+      </td>
+    </tr>
+  ))}
+</tbody>
+
+          </table>
+        </div>
+      )}
+
+      <p className="mt-3 text-info">
+        CSV columns required: <br/>
+        <strong>
+          regdNo, name, email, department, Preference1, Preference2, Preference3, Preference4
+        </strong>
+      </p>
+    </div>
+  );
+}

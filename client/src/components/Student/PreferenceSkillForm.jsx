@@ -4,72 +4,71 @@ import axios from "axios";
 
 const NUM_CHOICES = 4;
 
-export default function PreferenceForm() {
-  const [electives, setElectives] = useState([]);
+export default function LifeskillPreferenceForm() {
+  const [lifeskills, setLifeskills] = useState([]);
   const [selections, setSelections] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const [completedElectiveCodes, setCompletedElectiveCodes] = useState([]);
+  const [completedLifeskillCodes, setCompletedLifeskillCodes] = useState([]);
   const [isAlreadySubmitted, setIsAlreadySubmitted] = useState(false);
 
-  const [showCompletedInput, setShowCompletedInput] = useState(false); // Ask completed electives
-  const [completedInput, setCompletedInput] = useState(""); // comma-separated codes
+  const [showCompletedInput, setShowCompletedInput] = useState(false);
+  const [completedInput, setCompletedInput] = useState("");
 
   const studentRegdNo = localStorage.getItem("regdNo");
   const token = localStorage.getItem("token");
 
+  // ---------------- Fetch LifeSkills & Status ----------------
   useEffect(() => {
     if (!studentRegdNo) {
       setError("Student registration number not found. Please log in again.");
       return;
     }
 
-    const fetchElectivesAndStatus = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
         const headers = { Authorization: `Bearer ${token}` };
 
-        // Fetch all electives
-        const electivesRes = await axios.get("http://localhost:5000/electives", { headers });
-        const allElectives = Array.isArray(electivesRes.data) ? electivesRes.data : [];
+        // Fetch all available lifeskills
+        const lifeskillsRes = await axios.get("http://localhost:5000/lifeskills", { headers });
+        const allLifeskills = Array.isArray(lifeskillsRes.data) ? lifeskillsRes.data : [];
 
-        // Fetch student's status
+        // Fetch student status
         const statusRes = await axios.get(
-          `http://localhost:5000/api/student/allocation-details`,
+          "http://localhost:5000/api/lifeskillsStudent/allocation-details",
           { headers }
         );
         const studentStatus = statusRes.data;
 
         if (studentStatus.preferencesSubmitted) {
           setIsAlreadySubmitted(true);
-          setSuccess("✅ Your preferences have already been submitted.");
+          setSuccess("✅ Your life skill preferences have already been submitted.");
+
+          // Load previously submitted preferences
           const existingSelections = {};
           if (Array.isArray(studentStatus.currentPreferences)) {
             studentStatus.currentPreferences.forEach(pref => {
-              existingSelections[pref.rank] = pref.electiveId;
+              existingSelections[pref.rank] = pref.lifeSkillId || pref.lifeskillId || pref._id;
             });
           }
           setSelections(existingSelections);
-
-          const completedIds = Array.isArray(studentStatus.completedElectives)
-            ? studentStatus.completedElectives
-            : [];
-          setCompletedElectiveCodes(completedIds);
-          const availableElectives = allElectives.filter(e => !completedIds.includes(e.code));
-          setElectives(availableElectives);
-        } else {
-          // If no completed electives stored, ask input
-          if (!studentStatus.completedElectives || studentStatus.completedElectives.length === 0) {
-            setShowCompletedInput(true);
-          } else {
-            const completedIds = studentStatus.completedElectives;
-            setCompletedElectiveCodes(completedIds);
-            const availableElectives = allElectives.filter(e => !completedIds.includes(e.code));
-            setElectives(availableElectives);
-          }
         }
+
+        // Handle completed life skills
+        const completedIds = Array.isArray(studentStatus.completedLifeSkills)
+          ? studentStatus.completedLifeSkills
+          : [];
+
+        setCompletedLifeskillCodes(completedIds);
+        const availableLifeskills = allLifeskills.filter(
+          e => !completedIds.includes(e.code)
+        );
+        setLifeskills(availableLifeskills);
+
+        if (completedIds.length === 0) setShowCompletedInput(true);
       } catch (err) {
         console.error(err);
         setError("Failed to load data. Please try again later.");
@@ -78,97 +77,108 @@ export default function PreferenceForm() {
       }
     };
 
-    fetchElectivesAndStatus();
+    fetchData();
   }, [studentRegdNo, token]);
 
+  // ---------------- Handle completed life skills input ----------------
   const handleCompletedSubmit = async () => {
     const inputCodes = completedInput
       .split(",")
       .map(s => s.trim())
-      .filter(Boolean); // remove empty strings
+      .filter(Boolean);
 
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const electivesRes = await axios.get("http://localhost:5000/electives", { headers });
-      const allElectives = Array.isArray(electivesRes.data) ? electivesRes.data : [];
+      const lifeskillsRes = await axios.get("http://localhost:5000/lifeskills", { headers });
+      const allLifeskills = Array.isArray(lifeskillsRes.data) ? lifeskillsRes.data : [];
 
-      const validCodes = allElectives.map(e => e.code);
+      const validCodes = allLifeskills.map(e => e.code);
       const filteredCodes = inputCodes.filter(code => validCodes.includes(code));
 
-      // Accept empty input as valid
-      setCompletedElectiveCodes(filteredCodes);
-
-      const availableElectives = allElectives.filter(e => !filteredCodes.includes(e.code));
-      setElectives(availableElectives);
-
-      setShowCompletedInput(false); // Move to main form
+      setCompletedLifeskillCodes(filteredCodes);
+      const availableLifeskills = allLifeskills.filter(e => !filteredCodes.includes(e.code));
+      setLifeskills(availableLifeskills);
+      setShowCompletedInput(false);
       setError("");
     } catch (err) {
       console.error(err);
-      setError("Failed to validate completed electives. Try again.");
+      setError("Failed to validate completed life skills. Try again.");
     }
   };
 
-  const handleRadioChange = (electiveId, rank) => {
+  // ---------------- Handle radio selection ----------------
+  const handleRadioChange = (lifeSkillId, rank) => {
     const updatedSelections = { ...selections };
     for (let r = 1; r <= NUM_CHOICES; r++) {
-      if (updatedSelections[r] === electiveId) updatedSelections[r] = null;
+      if (updatedSelections[r] === lifeSkillId) updatedSelections[r] = null;
     }
-    updatedSelections[rank] = electiveId;
+    updatedSelections[rank] = lifeSkillId;
     setSelections(updatedSelections);
     setError("");
     setSuccess("");
   };
 
+  // ---------------- Handle Submit ----------------
   const handleSubmit = async e => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
+
     if (isAlreadySubmitted) return;
     if (!selections[1]) return setError("Choice 1 is mandatory.");
 
-    const selectedElectiveIds = Object.values(selections).filter(Boolean);
-    if (new Set(selectedElectiveIds).size !== selectedElectiveIds.length) {
-      return setError("Cannot select same elective for multiple ranks.");
+    const selectedIds = Object.values(selections).filter(Boolean);
+    if (new Set(selectedIds).size !== selectedIds.length) {
+      return setError("Cannot select the same life skill for multiple ranks.");
     }
 
+    // ✅ Correct key name for backend (lifeSkillId)
     const rankedPreferences = Object.keys(selections)
       .filter(r => selections[r])
       .sort((a, b) => a - b)
-      .map(rank => ({ rank: parseInt(rank, 10), electiveId: selections[rank] }));
+      .map(rank => ({
+        rank: parseInt(rank, 10),
+        lifeSkillId: selections[rank],
+      }));
+
+    console.log("Submitting preferences:", rankedPreferences);
 
     setLoading(true);
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      await axios.post(
-        `http://localhost:5000/api/student/submit-preferences`,
-        { preferences: rankedPreferences, completedElectives: completedElectiveCodes },
+      const res = await axios.post(
+        "http://localhost:5000/api/lifeskillsStudent/submit-preferences",
+        { preferences: rankedPreferences, completedLifeSkills: completedLifeskillCodes },
         { headers }
       );
-      setSuccess("Preferences submitted successfully!");
+      console.log("Server response:", res.data);
+      setSuccess("✅ Preferences submitted successfully!");
       setIsAlreadySubmitted(true);
     } catch (err) {
-      console.error(err);
-      setError("Failed to submit preferences.");
+      console.error("Submit error:", err.response?.data || err.message);
+      setError(`❌ Failed to submit preferences. ${err.response?.data?.message || ""}`);
     } finally {
       setLoading(false);
     }
   };
 
+  // ---------------- Render ----------------
   if (loading) return <Spinner animation="border" className="m-4" />;
 
   if (showCompletedInput) {
     return (
       <Card className="m-4 p-4 shadow-lg">
-        <h3>Enter any electives you have already completed</h3>
-        <p>Separate multiple electives by commas (optional). e.g., 22CS101, 22CS102</p>
+        <h3>Enter any life skills you have already completed</h3>
+        <p>Separate multiple codes by commas (e.g., 21LS01, 21LS02)</p>
         <Form.Group className="mb-3">
           <Form.Control
             type="text"
             value={completedInput}
             onChange={e => setCompletedInput(e.target.value)}
-            placeholder="Enter completed electives codes"
+            placeholder="Enter completed life skill codes"
           />
         </Form.Group>
-        <Button onClick={handleCompletedSubmit}>Submit Completed Electives</Button>
+        <Button onClick={handleCompletedSubmit}>Submit Completed Life Skills</Button>
         {error && <Alert className="mt-3" variant="danger">{error}</Alert>}
       </Card>
     );
@@ -176,7 +186,7 @@ export default function PreferenceForm() {
 
   return (
     <Card className="m-4 p-4 shadow-lg">
-      <h2>Elective Preference Submission</h2>
+      <h2>Life Skill Preference Submission</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       {success && <Alert variant="success">{success}</Alert>}
 
@@ -184,15 +194,15 @@ export default function PreferenceForm() {
         <Table bordered hover responsive>
           <thead>
             <tr>
-              <th>Subject Name</th>
+              <th>Life Skill Name</th>
               {Array.from({ length: NUM_CHOICES }, (_, i) => (
                 <th key={i + 1}>Choice {i + 1}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {electives.length > 0 ? (
-              electives.map(e => (
+            {lifeskills.length > 0 ? (
+              lifeskills.map(e => (
                 <tr key={e._id}>
                   <td>{e.name} ({e.code})</td>
                   {Array.from({ length: NUM_CHOICES }, (_, i) => {
@@ -215,7 +225,7 @@ export default function PreferenceForm() {
             ) : (
               <tr>
                 <td colSpan={NUM_CHOICES + 1} className="text-center text-muted">
-                  No available electives to display.
+                  No available life skills to display.
                 </td>
               </tr>
             )}
@@ -228,6 +238,3 @@ export default function PreferenceForm() {
     </Card>
   );
 }
-
-
-

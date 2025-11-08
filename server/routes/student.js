@@ -226,4 +226,21 @@ router.get("/download-slip", auth, async (req, res) => {
   }
 });
 
+
+router.get('/lifeskills', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).populate('completedLifeSkills');
+    const completedIds = user.completedLifeSkills.map(e => e._id.toString());
+    const availableSkills = await LifeSkill.find({
+      _id: { $nin: completedIds }
+    });
+    res.json({ lifeSkills: availableSkills });
+  } catch (err) {
+    console.error('Error fetching life skills:', err);
+    res.status(500).json({ error: 'Failed to load life skills' });
+  }
+});
+
+
+
 module.exports = router;

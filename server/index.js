@@ -29,6 +29,8 @@ const Student = require("./models/User");
 const Faculty = require("./models/Faculty");
 const Admin=require("./models/Admin")
 const electiveRoutes = require("./routes/electives");
+const lifeSkillsRouter = require("./routes/lifeskill");
+const lifeSkills=require('./routes/lifeSkillsStudent')
 
 
 
@@ -39,6 +41,8 @@ app.use("/api/faculty", facultyRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/electives", electiveRoutes);
 app.use("/api/student", studentRoutes);
+app.use("/lifeskills", lifeSkillsRouter);
+app.use("/api/lifeskillsStudent", lifeSkills);
 
 app.post("/register", async (req, res) => {
   try {
